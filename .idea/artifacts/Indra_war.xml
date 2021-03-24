@@ -1,0 +1,14 @@
+<component name="ArtifactManager">
+  <artifact type="war" name="Indra:war">
+    <output-path>$PROJECT_DIR$/target</output-path>
+    <properties id="maven-jee-properties">
+      <options>
+        <module>Indra</module>
+        <packaging>war</packaging>
+      </options>
+    </properties>
+    <root id="archive" name="Indra-1.0.war">
+      <element id="artifact" artifact-name="Indra:war exploded" />
+    </root>
+  </artifact>
+</component>
