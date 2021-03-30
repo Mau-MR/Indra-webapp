@@ -20,9 +20,9 @@
             <div class="login-container">
                 <div class="img-login">
                     <img src="${pageContext.request.contextPath}/img/logominsaitBlanco.svg" alt="Logo Indra">
-                    <p>Prueba psicometrica</p>
+                    <p>Prueba psicométrica</p>
                 </div>
-                <form action="LoginAction" class="login-form"> <!-- Starts LoginAction -->
+                <form action="login" class="login-form"> <!-- Starts LoginAction -->
                     <div class="input-login"> 
                         <label for="mail">Tu correo:</label>
                         <input type="email" name="user-mail" id="mail" autocomplete="off" class="inputL"> <!--required -->
@@ -134,7 +134,7 @@
                                 </div> <!--Ends modal-container -->
                             </div> <!--Ends myModal -->
                         <div class="forgot-password-login">
-                            <a href="recuperar-contraseña.jsp">¿Olvidaste tu contraseña?</a>
+                            <a href="forgot_password">¿Olvidaste tu contraseña?</a>
                         </div>
                     </div>
                 </form> <!-- Ends LoginAction -->

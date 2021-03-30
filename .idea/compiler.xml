@@ -6,11 +6,12 @@
         <sourceOutputDir name="target/generated-sources/annotations" />
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
-        <module name="Indra" />
+        <module name="Indra-webapp" />
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
       <module name="Indra" target="1.8" />
+      <module name="Indra-webapp" target="1.8" />
     </bytecodeTargetLevel>
   </component>
 </project>

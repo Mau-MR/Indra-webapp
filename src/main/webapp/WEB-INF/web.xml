@@ -12,21 +12,12 @@
 
     <!-- Servlets para la navegación entre el login y el registro -->
     <servlet>
-        <servlet-name>registro</servlet-name>
-        <jsp-file>/WEB-INF/registroCandidato.jsp</jsp-file>
+        <servlet-name>forgot_password</servlet-name>
+        <jsp-file>/WEB-INF/recuperar-contraseña.jsp</jsp-file>
     </servlet>
     <servlet-mapping>
-        <servlet-name>registro</servlet-name>
-        <url-pattern>/registro</url-pattern>
-    </servlet-mapping>
-
-    <servlet>
-        <servlet-name>index</servlet-name>
-        <jsp-file>/WEB-INF/index.jsp</jsp-file>
-    </servlet>
-    <servlet-mapping>
-        <servlet-name>index</servlet-name>
-        <url-pattern>/index</url-pattern>
+        <servlet-name>forgot_password</servlet-name>
+        <url-pattern>/recuperar_contraseña</url-pattern>
     </servlet-mapping>
 
 </web-app>
