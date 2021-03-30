@@ -7,7 +7,8 @@ import java.sql.DriverManager;
 
 public class MySQLConnection {
     public static Connection getConnection() {
-        String cadena = "jdbc:mysql://Localhost:3306/pruebabloque?user=mawi&password=12345"; // &password=root
+        // String cadena = "jdbc:mysql://Localhost:3306/pruebabloque?user=mawi&password=12345"; // &password=root
+        String cadena = "jdbc:mysql://35.230.11.123:3306/traum?user=traumAdmin&password=Traum12345"; //Cadena para la BD externa
         Connection conexion = null;
         try {
             // ¿Qué driver en qué librería va a usar para conectarse?

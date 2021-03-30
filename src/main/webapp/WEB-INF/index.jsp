@@ -1,3 +1,4 @@
+<%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -5,20 +6,20 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Game</title>
-    <link rel="stylesheet" href="css/normalize.css" />
-    <link rel="stylesheet" href="css/styles.css" />
-    <link rel="stylesheet" href="Roboto/Roboto-Regular.ttf" />
-    <link rel="stylesheet" href="css/all.min.css">
-    <link rel="stylesheet" href="css/fontawesome.min.css">
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/css/normalize.css" />
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/css/styles.css" />
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/Roboto/Roboto-Regular.ttf" />
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/css/all.min.css">
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/css/fontawesome.min.css">
 </head>
 <body>
     <div id="particles-js">
-        <script src="js/particles.min.js"></script>
-        <script src="js/app.js"></script>
+        <script src="${pageContext.request.contextPath}/js/particles.min.js"></script>
+        <script src="${pageContext.request.contextPath}/js/app.js"></script>
         <main>
             <div class="login-container">
                 <div class="img-login">
-                    <img src="img/logominsaitBlanco.svg" alt="Logo Indra">
+                    <img src="${pageContext.request.contextPath}/img/logominsaitBlanco.svg" alt="Logo Indra">
                     <p>Prueba psicometrica</p>
                 </div>
                 <form action="LoginAction" class="login-form"> <!-- Starts LoginAction -->
@@ -133,13 +134,13 @@
                                 </div> <!--Ends modal-container -->
                             </div> <!--Ends myModal -->
                         <div class="forgot-password-login">
-                            <a href="recuperar-contraseña.html">¿Olvidaste tu contraseña?</a>
+                            <a href="recuperar-contraseña.jsp">¿Olvidaste tu contraseña?</a>
                         </div>
                     </div>
                 </form> <!-- Ends LoginAction -->
             </div>
         </main> 
     </div>
-    <script src="js/app-eye.js"></script>
+    <script src="${pageContext.request.contextPath}/js/app-eye.js"></script>
 </body>
 </html>

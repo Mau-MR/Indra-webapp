@@ -1,3 +1,4 @@
+<%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -5,24 +6,24 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Game</title>
-    <link rel="stylesheet" href="css/normalize.css" />
-    <link rel="stylesheet" href="css/styles.css" />
-    <link rel="stylesheet" href="Roboto/Roboto-Regular.ttf" />
-    <link rel="stylesheet" href="css/all.min.css">
-    <link rel="stylesheet" href="css/fontawesome.min.css">
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/css/normalize.css" />
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/css/styles.css" />
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/Roboto/Roboto-Regular.ttf" />
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/css/all.min.css">
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/css/fontawesome.min.css">
 </head>
 <body class="background">
     <div class="page-container ">
         <header>
             <div class="header-login">
-                <img src="img/logominsaitBlanco.svg" alt="Logo Indra">
+                <img src="${pageContext.request.contextPath}/img/logominsaitBlanco.svg" alt="Logo Indra">
                 
             </div>
         </header>
         <main class="container-login">
             <div class="login">
                 <div class="logo-login">
-                    <img src="img/Logo-Traum.svg" alt="Logo T">
+                    <img src="${pageContext.request.contextPath}/img/Logo-Traum.svg" alt="Logo T">
                 </div>
                 <form action="LoginAction" class="login-form font-login">
                     <div class="form-login"> 
@@ -31,7 +32,7 @@
                         <label for="password">Tu contraseña</label>
                         <input type="password" name="user-password" id="password" required autocomplete="off">
                     </div>
-                    <div></div>
+                    <div>
                         <div class="forgot-password">
                             <a href="#">¿Olvidaste tu contraseña?</a>
                         </div>

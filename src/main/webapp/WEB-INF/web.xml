@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app xmlns="http://xmlns.jcp.org/xml/ns/javaee"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_4_0.xsd"
+         version="4.0">
+    <welcome-file-list>
+        <welcome-file>/WEB-INF/index.jsp</welcome-file>
+    </welcome-file-list>
+    <error-page>
+        <location>/WEB-INF/error.jsp</location>
+    </error-page>
+
+    <!-- Servlets para la navegación entre el login y el registro -->
+    <servlet>
+        <servlet-name>registro</servlet-name>
+        <jsp-file>/WEB-INF/registroCandidato.jsp</jsp-file>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>registro</servlet-name>
+        <url-pattern>/registro</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <servlet-name>index</servlet-name>
+        <jsp-file>/WEB-INF/index.jsp</jsp-file>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>index</servlet-name>
+        <url-pattern>/index</url-pattern>
+    </servlet-mapping>
+
+</web-app>
