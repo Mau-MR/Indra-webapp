@@ -14,7 +14,7 @@ html {
 }
 @media (min-width: 2388px) {
     html {
-        font-size: 125%; /** For Ipad Pro**/
+        font-size: 125%; /** For Ipad Pro **/
     }
 }
 *,
