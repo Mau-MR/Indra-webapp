@@ -15,7 +15,7 @@ public class AdministradorController extends HttpServlet {
         try {
             HttpSession sesion = request.getSession();
             if (sesion.getAttribute("administrador") != null) {
-                request.getRequestDispatcher("WEB-INF/main.jsp").forward(request, response);
+                request.getRequestDispatcher("WEB-INF/homeAdministrador.jsp").forward(request, response);
             }
             else {
                 request.setAttribute("mensaje", "No tienes acceso, inicia sesión");

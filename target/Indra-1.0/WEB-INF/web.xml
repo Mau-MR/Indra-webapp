@@ -17,7 +17,7 @@
     </servlet>
     <servlet-mapping>
         <servlet-name>forgot_password</servlet-name>
-        <url-pattern>/recuperar_contraseña</url-pattern>
+        <url-pattern>/forgot_password</url-pattern>
     </servlet-mapping>
 
 </web-app>

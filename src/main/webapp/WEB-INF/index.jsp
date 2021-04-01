@@ -22,13 +22,13 @@
                     <img src="${pageContext.request.contextPath}/img/logominsaitBlanco.svg" alt="Logo Indra">
                     <p>Prueba psicométrica</p>
                 </div>
-                <form action="login" class="login-form"> <!-- Starts LoginAction -->
+                <form action="login" method="POST" class="login-form"> <!-- Starts LoginAction -->
                     <div class="input-login"> 
                         <label for="mail">Tu correo:</label>
-                        <input type="email" name="user-mail" id="mail" autocomplete="off" class="inputL"> <!--required -->
+                        <input type="email" name="mail" id="mail" autocomplete="off" class="inputL"> <!--required -->
                         <label for="password">Tu contraseña:</label>
                         <div class="inputB inputL">
-                            <input type="password" name="user-password" id="password" autocomplete="off"> <!--required -->
+                            <input type="password" name="password" id="password" autocomplete="off"> <!--required -->
                             <i class="fas fa-eye" id="togglePassword"></i>
                         </div>
                     </div>
@@ -45,11 +45,11 @@
                                                 <div class="column-one">
                                                     <div class="item-grid"> 
                                                         <label for="">Nombre:</label>
-                                                        <input type="text" required>
+                                                        <input type="text">
                                                     </div>
                                                     <div class="item-grid"> 
                                                         <label for="">Apellido paterno:</label>
-                                                        <input type="text" required>
+                                                        <input type="text">
                                                     </div>
                                                     <div class="item-grid"> 
                                                         <label for="">Apellido materno:</label>
@@ -57,7 +57,7 @@
                                                     </div>
                                                     <div class="item-grid"> 
                                                         <label for="">CURP:</label>
-                                                        <input type="text" required>
+                                                        <input type="text">
                                                     </div>
                                                 </div> <!-- Ends column-one -->
                                             </section>
@@ -66,23 +66,23 @@
                                                 <div class="column-two">
                                                     <div class="item-grid"> 
                                                         <label for="">Número de télefono:</label>
-                                                        <input type="text" required>
+                                                        <input type="text">
                                                     </div> 
                                                     <div class="item-grid"> 
                                                         <label for="">Correo:</label>
-                                                        <input type="text" required>
+                                                        <input type="text">
                                                     </div>
                                                     <div class="item-grid"> 
                                                         <label for="">Contraseña:</label>
                                                         <div class="inputB2 inputL2"> <!-- eye -->
-                                                            <input type="password" required autocomplete="off" id="password-2">
+                                                            <input type="password" autocomplete="off" id="password-2">
                                                             <i class="fas fa-eye" id="togglePassword-2"></i>
                                                         </div>
                                                     </div>
                                                     <div class="item-grid"> 
                                                         <label for="">Vuela a escribir la contraseña:</label>
                                                         <div class="inputB2 inputL2"> <!-- eye -->
-                                                            <input type="password" required id="password-3">
+                                                            <input type="password" id="password-3">
                                                             <i class="fas fa-eye" id="togglePassword-3"></i>
                                                         </div> 
                                                     </div>
@@ -93,7 +93,7 @@
                                                 <div class="column-three">
                                                     <div class="item-grid"> 
                                                         <label for="">Seleccione área de interés:</label>
-                                                        <select id="" class="input" required>
+                                                        <select id="" class="input">
                                                             <option value="" disabled selected>— Seleccione —</option>
                                                             <option value="">Área Uno</option>
                                                             <option value="">Área Dos</option>
@@ -104,7 +104,7 @@
                                                     </div>
                                                     <div class="item-grid"> 
                                                         <label for="">Seleccione su grado académico:</label>
-                                                        <select id="" class="input" required>
+                                                        <select id="" class="input">
                                                             <option value="" disabled selected>— Seleccione —</option>
                                                             <option value="">Doctorado</option>
                                                             <option value="">Especialidad</option>

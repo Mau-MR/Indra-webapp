@@ -39,7 +39,7 @@ public class LoginDao implements ILoginDao{
 
     @Override
     public String getUserType(String correo) {
-        String sql = "SELECT nombre AS tipo FROM rol WHERE id_rol = ( SELECT id_rol FROM Cuenta WHERE correo = ?)";
+        String sql = "SELECT nombre AS tipo FROM rol WHERE id_rol = ( SELECT id_rol FROM cuenta WHERE correo = ?)";
 
         try {
             Connection conexion = MySQLConnection.getConnection(); // Nos conectamos a la base de datos

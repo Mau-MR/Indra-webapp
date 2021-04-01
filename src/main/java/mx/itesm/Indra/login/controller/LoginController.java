@@ -20,7 +20,7 @@ public class LoginController extends HttpServlet {
     //Manipular la información
     public void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException {
         // Obtenemos los datos del correo y de la contraseña
-        String correo = request.getParameter("correo");
+        String correo = request.getParameter("mail");
         String password = request.getParameter("password");
 
         System.out.println(correo);
