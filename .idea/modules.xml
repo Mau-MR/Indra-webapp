@@ -2,7 +2,7 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/Indra.iml" filepath="$PROJECT_DIR$/Indra.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/Indra-webapp.iml" filepath="$PROJECT_DIR$/.idea/Indra-webapp.iml" />
     </modules>
   </component>
 </project>

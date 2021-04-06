@@ -7,43 +7,31 @@ import java.sql.DriverManager;
 
 public class MySQLConnection {
     public static Connection getConnection() {
-        String cadena = "jdbc:mysql://Localhost:3306/pruebabloque?user=mawi&password=12345"; // &password=root
+        //String cadena = "jdbc:mysql://Localhost:3306/traum?user=root"; // &password=root
+        String cadena = "jdbc:mysql://35.230.11.123:3306/traum?user=traumAdmin&password=Traum12345";
         Connection conexion = null;
         try {
-            // ¿Qué driver en qué librería va a usar para conectarse?
             DriverManager.registerDriver(new Driver());
             conexion = DriverManager.getConnection(cadena);
-        } catch (Exception ex) {
+        }
+        catch (Exception ex) {
             System.out.println(ex.getMessage());
         }
 
         return conexion;
     }
-    // psvm + tab
+
     public static void main(String[] args) {
-        // Toda llamada a un servicio remoto debe verificarse - try/catch
         try {
-            Connection conexion = MySQLConnection.getConnection(); // sobre rojo -> alt + Enter
+            Connection conexion = MySQLConnection.getConnection();
             if(conexion != null) {
                 System.out.println("Se conectó");
-            } else {
+            }
+            else {
                 System.out.println("No se conectó");
             }
         } catch(Exception ex) {
             System.out.println(ex.getMessage()); // ¿Qué erro hobo?
         }
     }
-    // Clases genéricas para manipular la conexión a BD: java.sql
-    // Toda llamada a un servisio remoto debe verificarse -> con try/catch
-
 }
-
-/*
-Static
-    No
-    MySQLConnection con = new MySQLConnection();
-    con.getConnection();
-
-    SI
-    MySQLConnection.getConnection();
- */

@@ -1,12 +1,16 @@
 package mx.itesm.Indra.login.controller;
 
 import mx.itesm.Indra.login.dao.LoginDao;
-import java.io.*;
-import javax.servlet.http.*;
-import javax.servlet.annotation.*;
-// Anotación
-// IMPORTANTE: Aqui nombramos el servlet y declaramos la ruta para acceder a él
-@WebServlet(name = "Login", value = "/login")
+import mx.itesm.Indra.login.model.Cuenta;
+
+import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
+import java.io.IOException;
+
+@WebServlet(name = "login", value = "/login")
 public class LoginController extends HttpServlet {
     //Recuperar información (mostrar páginas a las que no sea necesario enviar valores)
     public void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException {
@@ -15,28 +19,88 @@ public class LoginController extends HttpServlet {
 
     //Manipular la información
     public void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException {
-        String usuario = request.getParameter("usuario");
+        // Obtenemos los datos del correo y de la contraseña
+        String correo = request.getParameter("mail");
         String password = request.getParameter("password");
-        //Codigo para verificar en la BD
-        // DAO = DATO ACCESS OBJECT
-        System.out.println(usuario);
+
+        System.out.println(correo);
         System.out.println(password);
 
         LoginDao loginDao = new LoginDao();
-        boolean flag = loginDao.verifyUser(usuario,password);
-        if(flag) {
-            //Redirigir a la página home
-            // sendRedirect redirigé a un recurso sin eviar valores o parámetros
-            //              hace un petición HTTP con request y response vacíos
-            response.sendRedirect("main.html");
-        } else {
-            // Redirigir al index con el mensaje de error
-            request.setAttribute("mensaje","El usuario o contraseña son incorrectos");
-            try {
-                request.getRequestDispatcher("loginCandidato.html").forward(request,response);
-            } catch(Exception ex) {
-                System.out.println(ex.getClass().getCanonicalName() + "-" + ex.getMessage());
-            }
+        //Verificar el tipo de usuario
+        String tipo = loginDao.getUserType(correo);
+        System.out.println("tipo:   " + tipo);
+        //Dividimos según el tipo de cuenta que sea, y después verificamos con el método verifyStatus si está habilitada
+        switch (tipo) {
+            case "administrador":
+                if (loginDao.verifyUser(correo, password)) {
+                    Cuenta administrador = loginDao.verifyStatus(correo, password);
+                    if (administrador != null) {
+                        HttpSession sesion = request.getSession();
+                        sesion.setAttribute("administrador", administrador);
+                        sesion.removeAttribute("candidato");
+                        response.sendRedirect("administrador");
+                    }
+                    else {
+                        try {
+                            request.setAttribute("mensaje", "Cuenta inhabilitada");
+                            request.getRequestDispatcher("WEB-INF/index.jsp").forward(request, response);
+                        }
+                        catch (Exception ex) {
+                            System.out.println(ex.getMessage());
+                        }
+                    }
+                }
+                else {
+                    try {
+                        request.setAttribute("mensaje", "El usuario o contraseña son incorrectos");
+                        request.getRequestDispatcher("WEB-INF/index.jsp").forward(request, response);
+                    }
+                    catch (Exception ex) {
+                        System.out.println(ex.getMessage());
+                    }
+                }
+                break;
+            case "candidato":
+                if(loginDao.verifyUser(correo, password)) {
+                    Cuenta candidato = loginDao.verifyStatus(correo, password);
+                    if (candidato != null) {
+                        HttpSession sesion = request.getSession();
+                        sesion.setAttribute("candidato", candidato);
+                        sesion.removeAttribute("administrador");
+                        response.sendRedirect("candidato");
+                    }
+                    else {
+                        try {
+                            request.setAttribute("mensaje", "El usuario o contraseña son incorrectos");
+                            request.getRequestDispatcher("WEB-INF/index.jsp").forward(request, response);
+                        }
+                        catch (Exception ex) {
+                            System.out.println(ex.getMessage());
+                        }
+                    }
+                }
+                else {
+                    try {
+                        request.setAttribute("mensaje", "El usuario o contraseña son incorrectos");
+                        request.getRequestDispatcher("WEB-INF/index.jsp").forward(request, response);
+                    }
+                    catch (Exception ex) {
+                        System.out.println(ex.getMessage());
+                    }
+                }
+
+                break;
+            default:
+                //Reedirigir al login con error
+                try {
+                    request.setAttribute("mensaje", "El usuario o contraseña son incorrectos");
+                    request.getRequestDispatcher("WEB-INF/index.jsp").forward(request, response);
+                }
+                catch (Exception ex) {
+                    System.out.println(ex.getMessage());
+                }
+
         }
     }
 }

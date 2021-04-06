@@ -1,3 +1,4 @@
+<%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -5,11 +6,11 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>homeAdministrador</title>
-  <link rel="stylesheet" href="css/normalize.css" />
-  <link rel="stylesheet" href="css/styles.css" />
-  <link rel="stylesheet" href="Roboto/Roboto-Regular.ttf" />
-  <link rel="stylesheet" href="css/all.min.css">
-  <link rel="stylesheet" href="css/fontawesome.min.css"/>
+  <link rel="stylesheet" href="${pageContext.request.contextPath}/css/normalize.css" />
+  <link rel="stylesheet" href="${pageContext.request.contextPath}/css/styles.css" />
+  <link rel="stylesheet" href="${pageContext.request.contextPath}/Roboto/Roboto-Regular.ttf" />
+  <link rel="stylesheet" href="${pageContext.request.contextPath}/css/all.min.css">
+  <link rel="stylesheet" href="${pageContext.request.contextPath}/css/fontawesome.min.css"/>
   <!--Tablas></!--> 
   <script type="text/javascript" charset="utf8" src="https://code.jquery.com/jquery-3.5.1.js"></script>
   <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.10.24/js/jquery.dataTables.min.js"></script>
@@ -19,7 +20,7 @@
   <header class="header"> <!--Stars header -->
     <div class="header-container">
       <div class="logo-home">
-        <img src="img/logominsaitBlanco.svg" alt="Image logo">
+        <img src="${pageContext.request.contextPath}/img/logominsaitBlanco.svg" alt="Image logo">
       </div>
     </div>
 
