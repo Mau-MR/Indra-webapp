@@ -23,13 +23,9 @@ public class LoginController extends HttpServlet {
         String correo = request.getParameter("mail");
         String password = request.getParameter("password");
 
-        System.out.println(correo);
-        System.out.println(password);
-
         LoginDao loginDao = new LoginDao();
         //Verificar el tipo de usuario
         String tipo = loginDao.getUserType(correo);
-        System.out.println("tipo:   " + tipo);
         //Dividimos según el tipo de cuenta que sea, y después verificamos con el método verifyStatus si está habilitada
         switch (tipo) {
             case "administrador":

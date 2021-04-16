@@ -104,7 +104,7 @@
                                                     </div>
                                                     <div class="item-grid"> 
                                                         <label for="">Seleccione su grado académico:</label>
-                                                        <select id="" class="input">
+                                                        <select class="input">
                                                             <option value="" disabled selected>— Seleccione —</option>
                                                             <option value="">Doctorado</option>
                                                             <option value="">Especialidad</option>
