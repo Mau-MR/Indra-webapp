@@ -14,40 +14,40 @@ html {
 }
 @media (min-width: 2388px) {
     html {
-        font-size: 125%; /** For Ipad Pro **/
+        font-size: 90%; /** For Big Monitor 2k**/
     }
 }
 *,
 *:before,
 *:after {
-box-sizing: inherit;
+    box-sizing: inherit;
 }
 /* Here ends the code of Paul Irish */
 /* GLOBAL */
 :root {
---mainColor: rgb(0, 61, 96);
---darkColor: rgb(0, 28, 44);
---inputColor: rgba(255, 255, 255, 0.575);
---whiteColor: aliceblue;
+    --mainColor: rgb(0, 61, 96);
+    --darkColor: rgb(0, 28, 44);
+    --inputColor: rgba(255, 255, 255, 0.575);
+    --whiteColor: aliceblue;
 }
 input::-ms-reveal, input::-ms-clear {
     display: none;
 }
 @font-face {
     font-family: Roboto-Regular;
-    src: url(../Roboto/Roboto-Regular.ttf);
+    src: url("../Roboto/Roboto-Regular.ttf");
 }
 @font-face {
     font-family: Roboto-Light;
-    src: url(../Roboto/Roboto-Light.ttf);
+    src: url("../Roboto/Roboto-Light.ttf");
 }
 @font-face {
     font-family: Roboto-Bold;
-    src: url(../Roboto/Roboto-Bold.ttf);
+    src: url("../Roboto/Roboto-Bold.ttf");
 }
 @font-face {
     font-family: Roboto-Thin;
-    src: url(../Roboto/Roboto-Thin.ttf);
+    src: url("../Roboto/Roboto-Thin.ttf");
 }
 .page-container {
     margin: 0 auto;
@@ -65,7 +65,7 @@ input::-ms-reveal, input::-ms-clear {
     position: fixed;
 }
 /***** Login Container CAPSULE *****/
-.login-container { 
+.login-container {
     margin: auto;
     position: absolute;
     text-align: center;
@@ -103,7 +103,7 @@ input::-ms-reveal, input::-ms-clear {
 @media (min-width: 1080px) {
     .img-login img {
         border-bottom: 0.2rem solid #fff;
-        margin: 0rem 0rem 2rem 0rem; 
+        margin: 0rem 0rem 2rem 0rem;
         width: 24.5rem;
         height: 10.5rem;
     }
@@ -114,7 +114,7 @@ input::-ms-reveal, input::-ms-clear {
     font-size: 1rem;
     color: #fff;
     text-transform: capitalize;
-    font-family: Roboto-Light;
+    font-family: "Roboto-Light", sans-serif;
 }
 @media (min-width: 360px) {
     .img-login p {
@@ -138,9 +138,9 @@ input::-ms-reveal, input::-ms-clear {
     width: 85%;
     height: 30rem;
     max-width: 26rem;
-    font-family: Roboto-Regular;
+    font-family: "Roboto-Regular", sans-serif;
     line-height: 2;
-    font-size: 1.2rem; 
+    font-size: 1.2rem;
 }
 @media (min-width: 360px) {
     .login-form {
@@ -154,18 +154,18 @@ input::-ms-reveal, input::-ms-clear {
     .login-form {
         height: 45rem;
         max-width: 40rem;
-        font-size: 1.8rem; 
+        font-size: 1.8rem;
     }
 }
 /***** Login Input *****/
 .input-login {
     display: grid;
     grid-template-columns: repeat(1, 1fr);
-    font-size: 1.4rem;  
+    font-size: 1.4rem;
 }
 @media (min-width: 768px) {
     .input-login {
-        font-size: 1.8rem;  
+        font-size: 1.8rem;
     }
 }
 .input-login label {
@@ -192,14 +192,14 @@ input::-ms-reveal, input::-ms-clear {
     color:var(--darkColor);
     border: 0.8rem;
     box-shadow: -4px -4px 10px rgba(255, 255, 255, 0.226),
-                inset 4px 4px 10px rgba(196, 241, 255, 0.602),
-                inset -4px -4px 10px rgba(255, 255, 255, 0.534)
-                    ,
-                4px 4px 10px rgba(255, 255, 255, 0.05);
+    inset 4px 4px 10px rgba(196, 241, 255, 0.602),
+    inset -4px -4px 10px rgba(255, 255, 255, 0.534)
+    ,
+    4px 4px 10px rgba(255, 255, 255, 0.05);
 }
 @media (min-width: 768px) {
     .input-login input {
-        font-size: 1.8rem;  
+        font-size: 1.8rem;
     }
 }
 .inputB, .inputB2 {
@@ -265,7 +265,7 @@ input::-ms-reveal, input::-ms-clear {
 @media (min-width: 768px) {
     .my-button-login {
         width: 25rem;
-        height: 5rem;  
+        height: 5rem;
     }
 }
 .my-button-login:hover {
@@ -303,7 +303,7 @@ input::-ms-reveal, input::-ms-clear {
 .modal {
     display: block !important; /* Scroll for Modal */
 }
-@media (min-width: 1080px) { 
+@media (min-width: 1080px) {
     .modal {
         display:inline; /* Scroll for Modal */
     }
@@ -325,7 +325,7 @@ input::-ms-reveal, input::-ms-clear {
         padding: 2rem 3rem;
     }
 }
-@media (min-width: 1080px) { 
+@media (min-width: 1080px) {
     .modal-container {
         width: 110rem;
         height: 62rem;
@@ -383,11 +383,11 @@ input::-ms-reveal, input::-ms-clear {
         width: 100%;
         grid-template-columns: repeat(3, 1fr);
     }
-} 
+}
 .section-modal h2 {
     text-align: center;
     margin: 0 0 8% 0;
-    font-family: Roboto-Light;
+    font-family: "Roboto-Light", sans-serif;
     font-size: 1.8rem;
     margin: 4rem 0 2rem 0;
 }
@@ -451,7 +451,7 @@ input::-ms-reveal, input::-ms-clear {
 }
 .item-grid input, .input, .inputL2 {
     outline: 0;
-    width: 100%; 
+    width: 100%;
     height: 100%;
     font-size: 1.2rem;
     text-align: center;
@@ -472,11 +472,12 @@ input::-ms-reveal, input::-ms-clear {
     background-color: transparent;
     margin: 0;
 }
+
 .inputB2 {
-    
     margin: auto auto;
     margin-top: 0.5rem;
 }
+
 .inputB2 i {
     margin-left: 1.75rem;
 }
@@ -493,7 +494,7 @@ input::-ms-reveal, input::-ms-clear {
 }
 @media (min-width: 768px) {
     .input-login input {
-        font-size: 1.8rem;  
+        font-size: 1.8rem;
     }
 }
 /***** Button Modal *****/
@@ -520,7 +521,7 @@ input::-ms-reveal, input::-ms-clear {
     background-color: #fff;
     border: 0;
     padding: 0.2rem;
-    font-family: Roboto-Regular;
+    font-family: "Roboto-Regular", sans-serif;
     font-size: 2rem;
 }
 .button-modal button i {
@@ -547,37 +548,113 @@ input::-ms-reveal, input::-ms-clear {
     background-color: var(--mainColor);
     margin-bottom: 2.5rem;
     top: 0;
-    height: 10rem;
+    height: 18rem;
     width: 100%;
     display: flex;
-    text-align: center;
     justify-content: center;
+    text-align: center;
+}
+@media (min-width: 768px) {
+    .header {
+        text-align: start;
+        height: 10rem;
+    }
 }
 .header-container {
-    width: 145rem;
+    width: 95%;
     height: 8rem;
     position: absolute;
     margin: 0 auto;
-    /*background-color: wheat;*/
+    margin-top: 2.5rem;
+}
+@media (min-width: 768px) {
+
 }
 .logo-home img {
-    height: 16rem;
+    height: 5rem;
     width: 20rem;
-    margin: 0;
 }
-.footer {
-    background-color: var(--mainColor);
-    position: absolute;
-    bottom: 0;
-    width: 100%;
-    height: 8%;
+@media (min-width: 768px) {
+    .logo-home img {
+        float: left;
+    }
+}
+.left {
+    margin-top: 3rem;
+}
+@media (min-width: 768px) {
+    .left {
+        float: right;
+        display: flex;
+        align-items: center;
+        margin-top: 0;
+    }
+}
+.welcome {
+    font-family: "Roboto-Regular", sans-serif;
     color: white;
-}
-/* Table Admin */
-.table {
-    font-family: Roboto-Regular;
     font-size: 1.2rem;
-    padding: 1.2rem;
-    background-color: var(--whiteColor);
+}
+@media (min-width: 768px) {
+    .welcome {
+        font-size: 2rem;
+    }
+}
+.logOut-page {
+    margin: 0 1rem;
+
+}
+button.button-page {
+    text-decoration: none;
+    font-family: "Roboto-Regular", sans-serif;
+    padding: 0.6rem 2rem;
+    background-color: aliceblue;
+    outline: none;
+    border: none;
+}
+.logOut-page button:hover {
+    transition: all 0.3s ease;
+    cursor: pointer;
+    background-color: rgb(81, 120, 156);
+    color: #fff;
 }
 
+.page-container {
+    margin: 1rem 0;
+}
+@media (min-width: 768px) {
+    .page-container {
+        margin: 1rem auto;
+    }
+}
+
+/* Table Admin */
+.table-bar {
+    text-align: center;
+    margin-bottom: 3rem;
+}
+@media (min-width: 768px) {
+    .table-bar {
+        margin: 0 auto;
+    }
+}
+.export button {
+    background-color: rgb(81, 120, 156);
+    color: #fff;
+}
+.export button:hover {
+    transition: all 0.3s ease;
+    cursor: pointer;
+    background-color: cadetblue;
+}
+.table {
+    overflow-x: auto;
+    font-family: "Roboto-Regular";
+    font-size: 1.2rem;
+    padding: 1.2rem;
+}
+@media (min-width: 768px) {
+    .table {
+        overflow-x: auto;
+    }
+}
