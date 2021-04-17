@@ -68,7 +68,7 @@ public class LoginController extends HttpServlet {
                     }
                     else {
                         try {
-                            request.setAttribute("mensaje", "El usuario o contraseña son incorrectos");
+                            request.setAttribute("mensaje", "La cuenta está inhabilitada");
                             request.getRequestDispatcher("WEB-INF/index.jsp").forward(request, response);
                         }
                         catch (Exception ex) {
