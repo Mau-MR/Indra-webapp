@@ -6,5 +6,6 @@ public interface ILoginDao {
      public boolean verifyUser(String correo, String password);
      public String getUserType(String correo);
      public Cuenta verifyStatus(String correo, String password);
+     public String getName(Cuenta cuenta);
 
 }

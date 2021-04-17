@@ -1,7 +1,9 @@
 package mx.itesm.Indra.login.controller;
 
 import mx.itesm.Indra.login.dao.CandidatosDao;
+import mx.itesm.Indra.login.dao.LoginDao;
 import mx.itesm.Indra.login.model.Candidato;
+import mx.itesm.Indra.login.model.Cuenta;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -19,9 +21,18 @@ public class AdministradorController extends HttpServlet {
         try {
             HttpSession sesion = request.getSession();
             if (sesion.getAttribute("administrador") != null) {
+                // Llenamos la lista con los candidatos y los mostramos en la página
                 CandidatosDao candidatosDao = new CandidatosDao();
                 List<Candidato> candidatosList = candidatosDao.cargarCandidatos();
                 request.setAttribute("candidatosList", candidatosList);
+
+                //Obtenemos el nombre a partir de obtener el objeto de la sesion de tipo de Cuenta y lo mandamos al jsp
+                LoginDao loginDao = new LoginDao();
+                Cuenta admin = (Cuenta) sesion.getAttribute("administrador");
+                System.out.println(admin.getId_persona());
+                String nombre = loginDao.getName(admin);
+                request.setAttribute("nombre", nombre);
+
                 request.getRequestDispatcher("WEB-INF/homeAdministrador.jsp").forward(request, response);
             }
             else {

@@ -101,4 +101,24 @@ public class LoginDao implements ILoginDao{
         return cuenta;
     }
 
+    public String getName(Cuenta cuenta) {
+        String nombre = "";
+        String sql = "SELECT nombre FROM persona WHERE id_persona IN (SELECT id_persona FROM cuenta WHERE id_persona " +
+                "= ?)";
+
+        try {
+            Connection conexion = MySQLConnection.getConnection();
+            PreparedStatement preparedStatement = conexion.prepareStatement(sql);
+            preparedStatement.setInt(1, cuenta.getId_persona());
+
+            ResultSet resultSet = preparedStatement.executeQuery();
+            if (resultSet.next()) {
+                return resultSet.getString("nombre");
+            }
+        }
+        catch (Exception ex) {
+            System.out.println(ex.getMessage());
+        }
+        return nombre;
+    }
 }
