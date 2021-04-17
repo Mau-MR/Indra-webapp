@@ -29,7 +29,6 @@ public class AdministradorController extends HttpServlet {
                 //Obtenemos el nombre a partir de obtener el objeto de la sesion de tipo de Cuenta y lo mandamos al jsp
                 LoginDao loginDao = new LoginDao();
                 Cuenta admin = (Cuenta) sesion.getAttribute("administrador");
-                System.out.println(admin.getId_persona());
                 String nombre = loginDao.getName(admin);
                 request.setAttribute("nombre", nombre);
 

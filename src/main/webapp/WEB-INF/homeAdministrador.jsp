@@ -83,17 +83,15 @@
         <table id="example" class="display" style="width:100%">
             <thead>
             <tr>
-                <div class="space">
-                    <th>Selección</th>
-                    <th>Acceso</th>
-                    <th>Nombre</th>
-                    <th>Correo</th>
-                    <th>Juego realizado</th>
-                    <th>Inteligencia emocional</th>
-                    <th>Trabajo bajo presión</th>
-                    <th>Área de interés</th>
-                    <th>Ver detalles</th>
-                </div>
+                <th>Selección</th>
+                <th>Acceso</th>
+                <th>Nombre</th>
+                <th>Correo</th>
+                <th>Juego realizado</th>
+                <th>Inteligencia emocional</th>
+                <th>Trabajo bajo presión</th>
+                <th>Área de interés</th>
+                <th>Ver detalles</th>
             </tr>
             </thead>
 
