@@ -19,6 +19,10 @@ public class Candidato implements Serializable {
     private String grado_academico;
     private String carreras;
 
+    public Candidato() {
+
+    }
+
     public Candidato(String nombre, String apellido, String curp, int telefono, String correo, String nacimiento, int edad, boolean status, boolean acceso, String interes, String skill_inteligencia, String skill_trabajo, String grado_academico, String carreras) {
         this.nombre = nombre;
         this.apellido = apellido;

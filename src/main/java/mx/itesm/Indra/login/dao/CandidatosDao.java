@@ -15,9 +15,7 @@ public class CandidatosDao implements ICandidatosDao {
     public List<Candidato> cargarCandidatos() {
 
         List<Candidato> candidatosList = new ArrayList<>(); //Creamos una nueva lista para almacenar a los candidatos
-        String sqlBasicos = "SELECT c.id_cuenta, p.nombre, p.paterno, p.materno, p.curp, p.telefono, c.correo, c" +
-                ".status, ri" +
-                ".descripcion AS inteligencia_emocional, rt.descripcion AS trabajo_bajo_presion\n" +
+        String sqlBasicos = "SELECT c.id_cuenta, p.nombre, p.paterno, p.materno, p.curp, p.telefono, c.correo, c.status, ri.descripcion AS inteligencia_emocional, rt.descripcion AS trabajo_bajo_presion\n" +
                 "\tFROM persona p, cuenta c, resultado ri, resultado rt\n" +
                 "    WHERE c.id_persona = p.id_persona AND c.id_cuenta = ri.id_cuenta AND ri.id_softskill = 1 \n" +
                 "    AND c.id_cuenta = rt.id_cuenta AND rt.id_softskill = 2";
@@ -125,7 +123,7 @@ public class CandidatosDao implements ICandidatosDao {
             if (resultSet.next() == false) {
                 System.out.println("Es nulo");
             }
-            if (resultSet.next() == true){
+            else if (resultSet.next() == true){
                 System.out.println("No es nulo");
             }
 

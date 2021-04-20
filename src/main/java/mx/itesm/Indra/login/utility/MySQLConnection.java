@@ -31,7 +31,7 @@ public class MySQLConnection {
                 System.out.println("No se conectó");
             }
         } catch(Exception ex) {
-            System.out.println(ex.getMessage()); // ¿Qué erro hobo?
+            System.out.println(ex.getMessage()); // ¿Qué error hubo?
         }
     }
 }

@@ -86,6 +86,7 @@
                 <th>Selección</th>
                 <th>Acceso</th>
                 <th>Nombre</th>
+                <th>Apellidos</th>
                 <th>Correo</th>
                 <th>Juego realizado</th>
                 <th>Inteligencia emocional</th>
@@ -96,7 +97,7 @@
             </thead>
 
             <tbody>
-            <c:forEach var="candidato" items="${candidatosList}">
+            <c:forEach var="candidato" items="${candidatosList}" varStatus="loop">
                 <tr>
                     <td>
                         <div class="minTable-container">
@@ -115,6 +116,11 @@
                     <td>
                         <div class="minTable-container">
                                 ${candidato.nombre}
+                        </div>
+                    </td> <!--Ends box-->
+                    <td>
+                        <div class="minTable-container">
+                                ${candidato.apellido}
                         </div>
                     </td> <!--Ends box-->
                     <td>
