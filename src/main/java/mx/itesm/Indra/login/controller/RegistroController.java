@@ -19,34 +19,44 @@ public class RegistroController extends HttpServlet {
     }
 
     public void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException {
-        //Obtenemos los datos del form de Registro
+        // Obtenemos los datos del form de Registro
         String nombre = request.getParameter("nombre");
         String apellido_paterno = request.getParameter("apellido_paterno");
         String apellido_materno = request.getParameter("apellido_materno");
         String curp = request.getParameter("curp");
-        int telefono = Integer.parseInt(request.getParameter("telefono")); // Transformamos de string a int
-        String password = request.getParameter("password");
+        int telefono = Integer.parseInt(request.getParameter("phone")); // Transformamos de string a int
+        String correo = request.getParameter("email");
+        String password = request.getParameter("password1");
         String area_interes = request.getParameter("area_interes");
         String grado_academico = request.getParameter("grado_academico");
-        String carrera = request.getParameter("carrera");
+        String primera_carrera = request.getParameter("carrera");
         String segunda_carrera = request.getParameter("segunda_carrera");
 
-        //Llenamos un objeto de tipo Candidato con los datos
+        // Llenamos un objeto de tipo Candidato con los datos
         Candidato candidato = new Candidato();
-
         candidato.setNombre(nombre);
-        candidato.setApellido(apellido_paterno + " " + apellido_materno);
+        candidato.setPaterno(apellido_paterno);
+        candidato.setMaterno(apellido_materno);
         candidato.setCurp(curp);
         candidato.setTelefono(telefono);
+        candidato.setCorreo(correo);
         candidato.setInteres(area_interes);
         candidato.setGrado_academico(grado_academico);
-        if (segunda_carrera != null) {
-            candidato.setCarreras(carrera + ";" + segunda_carrera);
-        }
-        else {
-            candidato.setCarreras(carrera);
-        }
+        candidato.setPrimera_carrera(primera_carrera);
+        candidato.setSegunda_carrera(segunda_carrera);
 
+
+        System.out.println(nombre);
+        System.out.println(apellido_paterno);
+        System.out.println(apellido_materno);
+        System.out.println(curp);
+        System.out.println(telefono);
+        System.out.println(correo);
+        System.out.println(password);
+        System.out.println(area_interes);
+        System.out.println(grado_academico);
+        System.out.println(primera_carrera);
+        System.out.println(segunda_carrera);
 
         //Creamos una instancia de RegistroDao para llamar al método de registroCandidato, le mandamos la cuenta y la
         // contraseña

@@ -21,11 +21,14 @@ public class LoginController extends HttpServlet {
     public void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException {
         // Obtenemos los datos del correo y de la contraseña
         String correo = request.getParameter("mail");
-        String password = request.getParameter("password");
+        String password = request.getParameter("user-password");
 
         LoginDao loginDao = new LoginDao();
         //Verificar el tipo de usuario
         String tipo = loginDao.getUserType(correo);
+        System.out.println(correo);
+        System.out.println(password);
+        System.out.println(tipo);
         //Dividimos según el tipo de cuenta que sea, y después verificamos con el método verifyStatus si está habilitada
         switch (tipo) {
             case "administrador":

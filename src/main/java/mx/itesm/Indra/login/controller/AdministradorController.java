@@ -1,5 +1,6 @@
 package mx.itesm.Indra.login.controller;
 
+import mx.itesm.Indra.login.dao.AutorizarDao;
 import mx.itesm.Indra.login.dao.CandidatosDao;
 import mx.itesm.Indra.login.dao.LoginDao;
 import mx.itesm.Indra.login.model.Candidato;
@@ -12,6 +13,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.util.List;
 
 @WebServlet(name = "administrador", value = "/administrador")
@@ -29,6 +31,7 @@ public class AdministradorController extends HttpServlet {
                 //Obtenemos el nombre a partir de obtener el objeto de la sesion de tipo de Cuenta y lo mandamos al jsp
                 LoginDao loginDao = new LoginDao();
                 Cuenta admin = (Cuenta) sesion.getAttribute("administrador");
+                request.setAttribute("id_cuenta", admin.getId_cuenta());
                 String nombre = loginDao.getName(admin);
                 request.setAttribute("nombre", nombre);
 
@@ -46,6 +49,14 @@ public class AdministradorController extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        String curp = request.getParameter("curp");
+        String minsait = request.getParameter("minsait");
+        boolean action = Boolean.parseBoolean(request.getParameter("action"));
 
+        AutorizarDao autorizarDao = new AutorizarDao();
+        autorizarDao.autorizacion(curp, minsait, action);
+
+        PrintWriter out = response.getWriter();
+        out.println("OK");
     }
 }

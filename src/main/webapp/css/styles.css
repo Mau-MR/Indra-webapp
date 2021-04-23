@@ -1,21 +1,10 @@
 html {
     box-sizing: border-box;
     font-size: 62.5%; /** 1rem = 10px **/
+
 }
-@media (min-width: 1668px) {
-    html {
-        font-size: 65%; /** For Tablets and Firefox**/
-    }
-}
-@media (min-height: 2388px) {
-    html {
-        font-size: 100%; /** For Ipad Pro**/
-    }
-}
-@media (min-width: 2388px) {
-    html {
-        font-size: 90%; /** For Big Monitor 2k**/
-    }
+p {
+    margin: auto !important;
 }
 *,
 *:before,
@@ -53,6 +42,34 @@ input::-ms-reveal, input::-ms-clear {
     margin: 0 auto;
     max-width: 120rem;
 
+}
+/* Valid Inputs */
+pre {
+    position: fixed;
+    padding: 0;
+    margin: 0;
+    width: 32rem;
+    text-align: center;
+}
+.resultado {
+    padding: 0;
+    margin: 0;
+    position: fixed;
+    font-family: "Roboto-Regular", sans-serif;
+    font-size: 1.2rem;
+    color: rgba(255, 0, 0, 0.74);
+    font-weight: bold;
+}
+.gray {
+    padding: 0;
+    margin: 0;
+    position: fixed;
+    font-family: "Roboto-Regular", sans-serif;
+    font-size: 1.2rem;
+    color: grey;
+}
+.resultado.ok {
+    color: green;
 }
 /* Index */
 /***** Login Background  *****/
@@ -487,6 +504,7 @@ input::-ms-reveal, input::-ms-clear {
         font-size: 1.8rem;
     }
 }
+
 /***** Button Modal *****/
 .button-modal {
     text-align: center;
@@ -572,13 +590,13 @@ input::-ms-reveal, input::-ms-clear {
         display: flex;
     }
 }
-.logo-home p {
+.logo-home h2 {
     font-family: "Roboto-Regular", sans-serif;
     font-size: 1.5rem;
     color: #fff;
 }
 @media (min-width: 768px) {
-    .logo-home p {
+    .logo-home h2 {
         font-size: 2rem;
         padding-left: 1rem;
     }
@@ -586,11 +604,13 @@ input::-ms-reveal, input::-ms-clear {
 .logo-home img {
     height: 5rem;
     width: 20rem;
+    margin-top: 1.5rem;
     padding-bottom: 1.5rem;
     border-bottom: solid #fff 0.1rem;
 }
 @media (min-width: 768px) {
     .logo-home img {
+        margin-top: 0;
         padding-bottom: 0;
         border-bottom: none;
         float: left;
@@ -628,14 +648,14 @@ input::-ms-reveal, input::-ms-clear {
         margin-left: 6%;
     }
 }
-@media (min-width: 1080px) {
+@media (min-width: 1130px) {
     .right {
         margin-left: 10%;
     }
 }
 @media (min-width: 1350px) {
     .right {
-        margin-left: 18%;
+        margin-left: 17%;
     }
 }
 
@@ -659,10 +679,11 @@ button.button-page {
     padding: 0.6rem 2rem;
     background-color: aliceblue;
     outline: none;
-
+    margin-top: 1rem;
 }
 @media (min-width: 768px) {
     button.button-page {
+        margin-top: 0;
         text-decoration: none;
         font-family: "Roboto-Regular", sans-serif;
         font-size: 1.3rem;
@@ -674,8 +695,7 @@ button.button-page {
 .logOut-page button:hover {
     transition: all 0.3s ease;
     cursor: pointer;
-    background-color: #056183;
-    color: #fff;
+    background-image: radial-gradient(circle at 50% -20.71%, #ffffff 0, #f0f7fb 25%, #cde5f2 50%, #abd2ea 75%, #8dc0e4 100%);
 }
 .page-container {
     margin: 1rem 0;
@@ -699,21 +719,27 @@ button.button-page {
     }
 }
 .export button {
-    background-color:rgb(243, 251, 255);
     color: var(--darkColor);
+    background: linear-gradient(to bottom, white 0%, #dcdcdc 100%);
     font-size: 1.2rem;
     margin: 0.5rem;
+    border: 1px solid #979797;
+    border-radius: 2px;
 }
 .export button:hover {
     transition: all 0.3s ease;
     cursor: pointer;
-    background-color: rgb(148, 195, 219);
+    box-shadow: inset 0 0 2px 1px rgba(128, 128, 128, 0.698);
 }
 .table {
-    overflow: auto;
     font-family: "Roboto-Regular", sans-serif;
     font-size: 1.2rem;
     padding: 1rem;
+}
+@media (max-width: 900px) {
+    .table {
+        overflow-y: scroll;
+    }
 }
 @media (min-width: 768px) {
     .table {
@@ -723,15 +749,24 @@ button.button-page {
 /* Table */
 thead {
     font-family: "Roboto-Light", sans-serif;
-    color: var(--darkColor);
+    color: #fff;
+    background-color: var(--mainColor);
 }
 tbody {
     color: var(--darkColor);
-    overflow: scroll;
+    overflow-y: scroll;
+    background-color:#eee;
+}
+@media (min-width: 900px) {
+    tbody {
+        color: var(--darkColor);
+        overflow: unset;
+        overflow-y: scroll;
+    }
 }
 .minTable-container {
     text-align: center;
-    align-items: center;
+    align-items: center!important;
 }
 /* Switch Table*/
 .switch {
@@ -781,4 +816,100 @@ tbody {
 }
 .switch-input:checked + .switch-label::after {
     left: 1.8rem;
+}
+
+/* Modal Admin */
+.modal-container-p {
+    opacity: 0;
+    visibility: hidden;
+
+    position: fixed;
+    z-index: 1000;
+    width: 100%;
+    height: 100vh;
+    top: 0;
+    left: 0;
+    background: rgba(0,0,0,0.5);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.modal-p {
+    width: 70%;
+    max-width: 120rem;
+    height: 75%;
+    max-height: 80rem;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    position: relative;
+    transition: transform 0.8s;
+    transform: translateY(0%);
+    border-radius: 1rem;
+    overflow-y: auto;
+    background-color:#eee;
+}
+@media (min-width: 1080px) {
+    .modal-p {
+        overflow-y: hidden; /* Scroll for Modal */
+    }
+}
+fieldset {
+    margin: 0 auto;
+    justify-content: center;
+    max-width: 80%;
+    line-height: 1.5;
+    font-size: 1rem;
+}
+@media (min-width: 768px) {
+    fieldset {
+        margin: 0 auto;
+        justify-content: center;
+        max-width: 80%;
+        line-height: 1.5;
+        font-size: 1.4rem;
+    }
+}
+.modal-text-p h2 {
+    font-size: 1.4rem;
+}
+@media (min-width: 1080px) {
+    .modal-text-p h2 {
+        font-size: 1.8rem;
+    }
+}
+fieldset {
+    color: var(--darkColor);
+}
+legend {
+    font-weight: bold;
+    text-align: center;
+    justify-content: center;
+}
+
+.modal-close-p {
+    transform: translateY(-200%);
+}
+.close-p {
+    position: absolute;
+    top: 0.8rem;
+    right: 1rem;
+    display: inline-block;
+    width: 2.5rem;
+    height: 2.5rem;
+    background-color: rgb(0, 28, 44);
+    color:#fff;
+    line-height: 2.5rem;
+    cursor: pointer;
+    border-radius: 50%;
+    font-family: 'Times New Roman', Times, serif;
+}
+.close-p:hover {
+    background-color: rgb(170, 224, 255);
+    color:rgb(0, 28, 44);
+}
+.flex-column {
+    display: flex;
+    margin: 0 auto;
 }

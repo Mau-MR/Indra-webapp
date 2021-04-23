@@ -36,45 +36,53 @@ togglePassword3.addEventListener('click', function () {
 
 
 function validarPASSWORD(input) {
-    var second = input.value,
+    var second = input,
         resultado = document.getElementById("resultadoPASSWORD"),
         first = document.getElementById("password1"),
-        valido = "No Válida";
-    
-    if (first.value == second.value) { 
-    	valido = "Válida";
+        valido = "No Son Iguales";
+
+    if (first.value == second.value) {
+        valido = "Son Iguales";
         resultado.classList.add("ok");
         document.getElementById("login").disabled = false;
     } else {
-    	resultado.classList.remove("ok");
+        resultado.classList.remove("ok");
         document.getElementById("login").disabled = true;
     }
-    
-    resultado.innerText = "Contraseña " + valido + first.value + second.value;
-    // resultado.innerText = "CURP: " + curp + "\nFormato: " + valido;
+
+    resultado.innerText = "Contraseñas " + valido;
 }
 
-function validar_clave(password2)
+function validar_clave(input)
 {
-    if(password2.length >= 8)
-    {		
-        var mayuscula = false;
-        var minuscula = false;
-        var numero = false;
-        var caracter_raro = false;
-        var inner = document.getElementById("message");
-        
-        for(var i = 0;i<password2.length;i++)
+    var resultado = document.getElementById("resultadoCORRECTA");
+    var valida = "Suficientemente Fuerte";
+
+    var mayuscula = false;
+    var minuscula = false;
+    var numero = false;
+    var caracter_raro = false;
+
+    if(mayuscula == false || minuscula == false || caracter_raro == false || numero == false)
+    {
+        resultado.classList.remove("ok");
+        document.getElementById("login").disabled = true;
+        resultado.innerText = "Contraseña " + valida;
+    }
+
+    if(input.value.length >= 8)
+    {
+        for(var i = 0;i<input.value.length;i++)
         {
-            if(password2.charCodeAt(i) >= 65 && password2.charCodeAt(i) <= 90)
+            if(input.value.charCodeAt(i) >= 65 && input.value.charCodeAt(i) <= 90)
             {
                 mayuscula = true;
             }
-            else if(password2.charCodeAt(i) >= 97 && password2.charCodeAt(i) <= 122)
+            else if(input.value.charCodeAt(i) >= 97 && input.value.charCodeAt(i) <= 122)
             {
                 minuscula = true;
             }
-            else if(password2.charCodeAt(i) >= 48 && password2.charCodeAt(i) <= 57)
+            else if(input.value.charCodeAt(i) >= 48 && input.value.charCodeAt(i) <= 57)
             {
                 numero = true;
             }
@@ -85,12 +93,12 @@ function validar_clave(password2)
         }
         if(mayuscula == true && minuscula == true && caracter_raro == true && numero == true)
         {
-            inner.innerText = "Contraseña Válida";
-            return true;
+            resultado.classList.add("ok");
+            document.getElementById("login").disabled = false;
+            valida = "Válida"
+            resultado.innerText = "Contraseña " + valida;
         }
     }
-    inner.innerText = "Introduzca Mayusculas, números y caracteres especiales";
-    return false;
+
+
 }
-
-

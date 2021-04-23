@@ -17,9 +17,8 @@ public class RegistroDao implements IRegistroDao{
         String insert_cuenta_interes = "INSERT INTO cuenta_area_interes(id_cuenta, id_area_interes) VALUES(?, ?)";
 
         // El apellido tiene el paterno y el materno, entonces lo dividimos según el espacio que hay entre ellos
-        String[] apellidos = candidato.getApellido().split(" ");
-        String apellido_paterno = apellidos[0];
-        String apellido_materno = apellidos[1];
+        String apellido_paterno = candidato.getPaterno();
+        String apellido_materno = candidato.getMaterno();
 
         // Nos conectamos a la base de datos y empezamos con las inserciones
         try {
@@ -78,11 +77,18 @@ public class RegistroDao implements IRegistroDao{
 
                     if (rs_get_id_grado_academico.next()) {
                         // ------------- Se hace la inserción de los datos en la tabla cuenta_grado_academico -------------
-                        String[] carreras = candidato.getCarreras().split(";");
+                        String primera_carrera = candidato.getPrimera_carrera();
+                        String segunda_carrera = candidato.getSegunda_carrera();
                         ps_cuenta_grado.setInt(1, rs_get_id_cuenta.getInt("id_cuenta"));
                         ps_cuenta_grado.setInt(2, rs_get_id_grado_academico.getInt("id_grado_academico"));
-                        ps_cuenta_grado.setString(3, carreras[0]);
+                        ps_cuenta_grado.setString(3, primera_carrera);
                         ps_cuenta_grado.executeUpdate();
+
+                        // Si existe otra carrera, ejecutamos la misma executeUpdate
+                        if (segunda_carrera != null) {
+                            ps_cuenta_grado.setString(3, segunda_carrera);
+                            ps_cuenta_grado.executeUpdate();
+                        }
 
                         // Obtenemos el indice de la tabla de area_interes
                         String get_id_area_interes = "SELECT id_area_interes FROM area_interes WHERE nombre = ?";
@@ -109,14 +115,15 @@ public class RegistroDao implements IRegistroDao{
         Candidato candidato = new Candidato();
 
         candidato.setNombre("Josías");
-        candidato.setApellido("Lucas Gonzalez");
+        candidato.setPaterno("González");
+        candidato.setMaterno("Lucas");
         candidato.setCurp("GOLE010119HGRNCRA3");
         candidato.setTelefono(53356742);
         candidato.setCorreo("josias@gmail.com");
         candidato.setInteres("Videjuegos");
         candidato.setGrado_academico("Doctorado");
         String password = "hola";
-        candidato.setCarreras("Licenciatura en Artes Musicales");
+        candidato.setPrimera_carrera("Licenciatura en Artes Musicales");
 
         RegistroDao registroDao = new RegistroDao();
         try {
