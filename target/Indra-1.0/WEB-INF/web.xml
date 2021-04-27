@@ -12,12 +12,12 @@
 
     <!-- Servlets para la navegación entre el login y el registro -->
     <servlet>
-        <servlet-name>forgot_password</servlet-name>
-        <jsp-file>/WEB-INF/recuperar-contraseña.jsp</jsp-file>
+        <servlet-name>index</servlet-name>
+        <jsp-file>/WEB-INF/index.jsp</jsp-file>
     </servlet>
     <servlet-mapping>
-        <servlet-name>forgot_password</servlet-name>
-        <url-pattern>/forgot_password</url-pattern>
+        <servlet-name>index</servlet-name>
+        <url-pattern>/index</url-pattern>
     </servlet-mapping>
 
 </web-app>

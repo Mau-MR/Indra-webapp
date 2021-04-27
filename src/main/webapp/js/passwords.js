@@ -1,104 +1,86 @@
-const togglePassword = document.querySelectorAll('#togglePassword')[0];
-const togglePassword2= document.querySelectorAll('#togglePassword')[1];
-const togglePassword3 = document.querySelectorAll('#togglePassword')[2];
 
-const password = document.getElementById('password');
-const password2 = document.getElementById("password1");
-const password3 = document.getElementById('password2');
+let boolPassword = false;
+// Passwords are shown with the eyes
+for (var i = 0; i < document.querySelectorAll('#password').length; i++) {
 
+    const password = document.querySelectorAll('#password')[i];
 
-togglePassword.addEventListener('click', function () {
-    // toggle the type attribute
-    const type = password.getAttribute('type') === 'password' ? 'text' : 'password';
-    password.setAttribute('type', type);
-    // toggle the eye slash icon
-    this.classList.toggle('fa-eye-slash');
+    document.querySelectorAll('#togglePassword')[i].addEventListener('click', function () {
+        // toggle the type attribute
+        const type = password.getAttribute('type') === 'password' ? 'text' : 'password';
+        password.setAttribute('type', type);
+        // toggle the eye slash icon
+        this.classList.toggle('fa-eye-slash');
+    });
+}
 
+// The password strength is validated
+document.querySelectorAll('#password')[1].addEventListener('input', function() {
+    var password = document.querySelectorAll('#password')[1],
+        result = document.getElementById("resultadoCORRECTA"),
+        complement = "Débil",
+        uppercase = false,
+        lowercase = false,
+        number = false,
+        rareCharacter = false;
+    // The chain is checked
+    if (password.value.length >= 8) {
+        for (var i = 0; i < password.value.length; i++) {
+            if (password.value.charCodeAt(i) >= 65 && password.value.charCodeAt(i) <= 90) {
+                uppercase = true;
+            }
+            else if (password.value.charCodeAt(i) >= 97 && password.value.charCodeAt(i) <= 122) {
+                lowercase = true;
+            }
+            else if (password.value.charCodeAt(i) >= 48 && password.value.charCodeAt(i) <= 57) {
+                number = true;
+            }
+            else {
+                rareCharacter = true;
+            }
+        }
+    }
+
+    if(password.value != "") {
+        if (uppercase == true && lowercase == true && rareCharacter == true && number == true) {
+            result.classList.add("ok");
+            complement = "Válida";
+            result.innerText = "Contraseña " + complement;
+            boolPassword = true;
+        }
+        else {
+            result.classList.remove("ok");
+            result.innerText =  "Contraseña " + complement;
+            boolPassword = false;
+        }
+    }
+    else {
+        result.innerText =  "";
+        boolPassword = false;
+    }
 });
 
-togglePassword2.addEventListener('click', function () {
-    // toggle the type attribute
-    const type = password2.getAttribute('type') === 'password' ? 'text' : 'password';
-    password2.setAttribute('type', type);
-    // toggle the eye slash icon
-    this.classList.toggle('fa-eye-slash');
-
-});
-
-togglePassword3.addEventListener('click', function () {
-    // toggle the type attribute
-    const type = password3.getAttribute('type') === 'password' ? 'text' : 'password';
-    password3.setAttribute('type', type);
-    // toggle the eye slash icon
-    this.classList.toggle('fa-eye-slash');
-
-});
-
-
-function validarPASSWORD(input) {
-    var second = input,
-        resultado = document.getElementById("resultadoPASSWORD"),
-        first = document.getElementById("password1"),
-        valido = "No Son Iguales";
+// Passwords similarity is valid
+document.querySelectorAll('#password')[2].addEventListener('input', function() {
+    var first = document.querySelectorAll('#password')[1],
+        second = document.querySelectorAll('#password')[2],
+        result = document.getElementById("resultadoPASSWORD"),
+        complement = "Diferentes";
 
     if (first.value == second.value) {
-        valido = "Son Iguales";
-        resultado.classList.add("ok");
-        document.getElementById("login").disabled = false;
+        complement = "Son Iguales";
+        result.classList.add("ok");
     } else {
-        resultado.classList.remove("ok");
-        document.getElementById("login").disabled = true;
+        result.classList.remove("ok");
     }
 
-    resultado.innerText = "Contraseñas " + valido;
-}
-
-function validar_clave(input)
-{
-    var resultado = document.getElementById("resultadoCORRECTA");
-    var valida = "Suficientemente Fuerte";
-
-    var mayuscula = false;
-    var minuscula = false;
-    var numero = false;
-    var caracter_raro = false;
-
-    if(mayuscula == false || minuscula == false || caracter_raro == false || numero == false)
-    {
-        resultado.classList.remove("ok");
-        document.getElementById("login").disabled = true;
-        resultado.innerText = "Contraseña " + valida;
+    if(first.value != "" && second.value != "") {
+        result.innerText = "Contraseñas " + complement;
+        boolPassword = true;
+    }
+    else {
+        result.innerText = "";
+        boolPassword = false;
     }
 
-    if(input.value.length >= 8)
-    {
-        for(var i = 0;i<input.value.length;i++)
-        {
-            if(input.value.charCodeAt(i) >= 65 && input.value.charCodeAt(i) <= 90)
-            {
-                mayuscula = true;
-            }
-            else if(input.value.charCodeAt(i) >= 97 && input.value.charCodeAt(i) <= 122)
-            {
-                minuscula = true;
-            }
-            else if(input.value.charCodeAt(i) >= 48 && input.value.charCodeAt(i) <= 57)
-            {
-                numero = true;
-            }
-            else
-            {
-                caracter_raro = true;
-            }
-        }
-        if(mayuscula == true && minuscula == true && caracter_raro == true && numero == true)
-        {
-            resultado.classList.add("ok");
-            document.getElementById("login").disabled = false;
-            valida = "Válida"
-            resultado.innerText = "Contraseña " + valida;
-        }
-    }
-
-
-}
+});

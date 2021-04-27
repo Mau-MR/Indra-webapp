@@ -1,47 +1,53 @@
-//Función para validar una CURP
-function curpValida(curp) {
-    var re = /^([A-Z][AEIOUX][A-Z]{2}\d{2}(?:0[1-9]|1[0-2])(?:0[1-9]|[12]\d|3[01])[HM](?:AS|B[CS]|C[CLMSH]|D[FG]|G[TR]|HG|JC|M[CNS]|N[ETL]|OC|PL|Q[TR]|S[PLR]|T[CSL]|VZ|YN|ZS)[B-DF-HJ-NP-TV-Z]{3}[A-Z\d])(\d)$/,
-        validado = curp.match(re);
-	
-    if (!validado)  //Coincide con el formato general?
-    	return false;
-    
-    //Validar que coincida el dígito verificador
-    function digitoVerificador(curp17) {
-        //Fuente https://consultas.curp.gob.mx/CurpSP/
-        var diccionario  = "0123456789ABCDEFGHIJKLMNÑOPQRSTUVWXYZ",
-            lngSuma      = 0.0,
-            lngDigito    = 0.0;
+// Function to validate a CURP
+
+let boolCURP = false;
+
+function curpValid(curp) {
+    var regex = /^([A-Z][AEIOUX][A-Z]{2}\d{2}(?:0[1-9]|1[0-2])(?:0[1-9]|[12]\d|3[01])[HM](?:AS|B[CS]|C[CLMSH]|D[FG]|G[TR]|HG|JC|M[CNS]|N[ETL]|OC|PL|Q[TR]|S[PLR]|T[CSL]|VZ|YN|ZS)[B-DF-HJ-NP-TV-Z]{3}[A-Z\d])(\d)$/,
+        valid = curp.match(regex);
+
+    if (!valid)  // Does it match the general format?
+        return false;
+
+    // Validate that the check digit matches
+    function checkDigit(curp17) {
+        // Reference https://consultas.curp.gob.mx/CurpSP/
+        var dictionary  = "0123456789ABCDEFGHIJKLMNÑOPQRSTUVWXYZ",
+            lngSum      = 0.0,
+            lngDigit    = 0.0;
         for(var i=0; i<17; i++)
-            lngSuma = lngSuma + diccionario.indexOf(curp17.charAt(i)) * (18 - i);
-        lngDigito = 10 - lngSuma % 10;
-        if (lngDigito == 10) return 0;
-        return lngDigito;
+            lngSum += dictionary.indexOf(curp17.charAt(i)) * (18 - i);
+        lngDigit = 10 - lngSum % 10;
+        if (lngDigit == 10) return 0;
+        return lngDigit;
     }
 
-    if (validado[2] != digitoVerificador(validado[1])) 
-    	return false;
-        
-    return true; //Validado
+    if (valid[2] != checkDigit(valid[1]))
+        return false;
+    return true; // Valid
 }
 
 
-//Handler para el evento cuando cambia el input
-//Lleva la CURP a mayúsculas para validarlo
+// For the event when the input changes
+// Capitalize the CURP to validate it
 function validarCURP(input) {
     var curp = input.value.toUpperCase(),
-        resultado = document.getElementById("resultadoCURP"),
-        valido = "No Válido";
-    
-    if (curpValida(curp)) { // ⬅️ Acá se comprueba
-    	valido = "Válido";
-        resultado.classList.add("ok");
-        document.getElementById("login").disabled = false;
+        result = document.getElementById("resultadoCURP"),
+        complement = "No Válida";
+
+    if (curpValid(curp)) { //  Here it is verified
+        complement = "Válida";
+        result.classList.add("ok");
+
     } else {
-    	resultado.classList.remove("ok");
-        document.getElementById("login").disabled = true;
+        result.classList.remove("ok");
+
     }
-    
-    resultado.innerText = "CURP " + valido;
-    // resultado.innerText = "CURP: " + curp + "\nFormato: " + valido;
+    if(input.value != "") {
+        result.innerText = "CURP " + complement; // the content is inserted in html
+    } else {
+        result.innerText = "";
+    }
+
+
 }

@@ -8,7 +8,7 @@ public class Candidato implements Serializable {
     private String paterno;
     private String materno;
     private String curp;
-    private int telefono;
+    private Long telefono;
     private String correo;
     private int edad;
     private boolean status;
@@ -21,12 +21,13 @@ public class Candidato implements Serializable {
     private String segunda_carrera;
     private int score_inteligencia;
     private int score_trabajo;
+    //private int duracion;
 
     public Candidato() {
 
     }
 
-    public Candidato(String nombre, String paterno, String materno, String curp, int telefono, String correo, int edad,
+    public Candidato(String nombre, String paterno, String materno, String curp, long telefono, String correo, int edad,
                      boolean status, boolean acceso, String interes, String skill_inteligencia, String skill_trabajo,
                      String grado_academico, String primera_carrera, String segunda_carrera, int score_inteligencia,
                      int score_trabajo) {
@@ -81,11 +82,11 @@ public class Candidato implements Serializable {
         this.curp = curp;
     }
 
-    public int getTelefono() {
+    public long getTelefono() {
         return telefono;
     }
 
-    public void setTelefono(int telefono) {
+    public void setTelefono(long telefono) {
         this.telefono = telefono;
     }
 

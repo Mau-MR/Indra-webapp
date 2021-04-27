@@ -168,13 +168,10 @@ public class CandidatosDao implements ICandidatosDao {
     }
 
     public static void main(String[] arg) {
-        String cadena = "";
-        if (cadena == null) {
-            System.out.println("Está vacío");
-        }
-        if (cadena != null) {
-            System.out.println("Está lleno");
-        }
+        String cadena = "545234567446727353";
+        long telefono = Long.parseLong(cadena);
+
+        System.out.println(telefono);
 
     }
 }

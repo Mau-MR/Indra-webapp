@@ -9,7 +9,7 @@ import java.sql.ResultSet;
 
 public class RegistroDao implements IRegistroDao{
     @Override
-    public void registroCandidato(Candidato candidato, String password) {
+    public boolean registroCandidato(Candidato candidato, String password) {
         // Definimos los inserts para cada tabla
         String insert_persona = "INSERT INTO persona(curp, nombre, paterno, materno, telefono) VALUES(?, ?, ?, ?, ?)";
         String insert_cuenta = "INSERT INTO cuenta(id_rol, id_persona, correo, password, status) VALUES (2, ?, ?, SHA2(?, 224), ?)";
@@ -37,7 +37,7 @@ public class RegistroDao implements IRegistroDao{
             ps_persona.setString(2, candidato.getNombre());
             ps_persona.setString(3, apellido_paterno);
             ps_persona.setString(4, apellido_materno);
-            ps_persona.setInt(5, candidato.getTelefono());
+            ps_persona.setLong(5, candidato.getTelefono());
             ps_persona.executeUpdate();
             // Para obtener el id_persona, hacemos una query con los datos ofrecidos
             String get_id_persona = "SELECT id_persona FROM persona WHERE curp = ? AND nombre = ? AND paterno = ? AND materno = ? AND telefono = ?";
@@ -46,7 +46,7 @@ public class RegistroDao implements IRegistroDao{
             ps_get_id_persona.setString(2, candidato.getNombre());
             ps_get_id_persona.setString(3, apellido_paterno);
             ps_get_id_persona.setString(4, apellido_materno);
-            ps_get_id_persona.setInt(5, candidato.getTelefono());
+            ps_get_id_persona.setString(5, Long.toString(candidato.getTelefono()));
             ResultSet rs_get_id_persona = ps_get_id_persona.executeQuery();
 
             // Una vez obtenido el id_persona, podemos hacer las demás queries
@@ -101,6 +101,8 @@ public class RegistroDao implements IRegistroDao{
                             ps_cuenta_interes.setInt(1, rs_get_id_cuenta.getInt("id_cuenta"));
                             ps_cuenta_interes.setInt(2, rs_get_id_area_interes.getInt("id_area_interes"));
                             ps_cuenta_interes.executeUpdate();
+
+                            return true;
                         }
                     }
                 }
@@ -109,6 +111,7 @@ public class RegistroDao implements IRegistroDao{
         catch (Exception ex) {
             System.out.println(ex.getMessage());
         }
+        return false;
     }
 
     public static void main(String[] arg) {

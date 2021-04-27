@@ -2,7 +2,7 @@ $(document).ready(()=>{
     $("input[type=checkbox]").on("change", function(){
         let curp = $(this).attr("id")
         let minsait = $(".welcome").find("p").attr("id");
-        if($(this).is(':checked')) {
+            if($(this).is(':checked')) {
             $.ajax({
                 url: 'administrador',
                 method: 'POST',
@@ -13,6 +13,7 @@ $(document).ready(()=>{
                 },
                 success: function(data){
                     if (data != null) {
+                        $("." + curp).html("Sí");
                         Swal.fire({
                             icon: "success",
                             title: "Se habilitó la cuenta con exito",
@@ -22,7 +23,6 @@ $(document).ready(()=>{
                     }
                 },
                 error: function(xhr, textStatus){
-                    alert(textStatus)
                     if (textStatus != null) {
                         Swal.fire({
                             icon: "error",
@@ -45,6 +45,7 @@ $(document).ready(()=>{
                 },
                 success: function (data) {
                     if (data != null) {
+                        $("." + curp).html("No");
                         Swal.fire({
                             icon: "success",
                             title: "Se deshabilitó la cuenta con exito",
