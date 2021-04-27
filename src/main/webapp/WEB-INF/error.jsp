@@ -8,6 +8,7 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
+    <link rel="shortcut icon" href="${pageContext.request.contextPath}/img/favicon.ico">
     <title>Página de Error</title>
 </head>
 <body>

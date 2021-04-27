@@ -3,25 +3,23 @@ package mx.itesm.Indra.login.controller;
 import mx.itesm.Indra.login.dao.LoginDao;
 import mx.itesm.Indra.login.model.Cuenta;
 
-import javax.servlet.annotation.WebServlet;
-import javax.servlet.http.HttpServlet;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
+import javax.servlet.*;
+import javax.servlet.http.*;
+import javax.servlet.annotation.*;
 import java.io.IOException;
 
 @WebServlet(name = "login", value = "/login")
 public class LoginController extends HttpServlet {
-    //Recuperar información (mostrar páginas a las que no sea necesario enviar valores)
-    public void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException {
+    @Override
+    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
     }
 
-    //Manipular la información
-    public void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException {
+    @Override
+    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         // Obtenemos los datos del correo y de la contraseña
-        String correo = request.getParameter("mail");
-        String password = request.getParameter("password");
+        String correo = request.getParameter("user-mail");
+        String password = request.getParameter("user-password");
 
         LoginDao loginDao = new LoginDao();
         //Verificar el tipo de usuario
@@ -30,22 +28,12 @@ public class LoginController extends HttpServlet {
         switch (tipo) {
             case "administrador":
                 if (loginDao.verifyUser(correo, password)) {
+                    // Como la cuenta administrador nunca se va a poder deshabilitar, entonces se redirecciona automáticamente
                     Cuenta administrador = loginDao.verifyStatus(correo, password);
-                    if (administrador != null) {
-                        HttpSession sesion = request.getSession();
-                        sesion.setAttribute("administrador", administrador);
-                        sesion.removeAttribute("candidato");
-                        response.sendRedirect("administrador");
-                    }
-                    else {
-                        try {
-                            request.setAttribute("mensaje", "Cuenta inhabilitada");
-                            request.getRequestDispatcher("WEB-INF/index.jsp").forward(request, response);
-                        }
-                        catch (Exception ex) {
-                            System.out.println(ex.getMessage());
-                        }
-                    }
+                    HttpSession sesion = request.getSession();
+                    sesion.setAttribute("administrador", administrador);
+                    sesion.removeAttribute("candidato");
+                    response.sendRedirect("administrador");
                 }
                 else {
                     try {

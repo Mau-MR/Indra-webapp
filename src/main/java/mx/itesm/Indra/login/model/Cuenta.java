@@ -3,6 +3,8 @@ package mx.itesm.Indra.login.model;
 import java.io.Serializable;
 
 public class Cuenta implements Serializable {
+    //Modelo para Cuenta
+
     private int id_cuenta;
     private int id_rol;
     private int id_persona;
