@@ -9,10 +9,9 @@ import java.io.IOException;
 public class LogoutController extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        // Cerramos sesión
+        // Cerramos sesión y redireccionamos al index.jsp
         HttpSession sesion = request.getSession();
         sesion.invalidate();
-        //response.sendRedirect("WEB-INF/index.jsp");
         request.getRequestDispatcher("WEB-INF/index.jsp").forward(request, response);
     }
 

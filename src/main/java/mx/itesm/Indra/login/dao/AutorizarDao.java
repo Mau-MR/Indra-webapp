@@ -8,15 +8,16 @@ import java.sql.ResultSet;
 
 public class AutorizarDao implements IAutorizarDao{
 
-
     @Override
     public void autorizacion(String curp, String minsait, boolean action) {
         // Cuando action es 'true', entonces vamos a insertar en la tabla Autorizacion, es decir, vamos a autorizar
         // al usuario, en caso contrario, vamos a eliminar su autorización, es decir, su registro en la tabla
+
         // Obtenemos el id_cuenta a partir de la curp
         String sql_id_cuenta = "SELECT id_cuenta FROM cuenta WHERE id_persona IN (SELECT id_persona FROM persona WHERE curp = ?)";
 
         try {
+            // Preparamos y ejecutamos la query
             Connection conexion = MySQLConnection.getConnection();
             PreparedStatement ps_id_cuenta = conexion.prepareStatement(sql_id_cuenta);
             ps_id_cuenta.setString(1, curp);
@@ -34,10 +35,11 @@ public class AutorizarDao implements IAutorizarDao{
                     int in = preparedStatement.executeUpdate();
                 }
                 else {
+                    // Se elimina que autoriza al candidato
                     String sql = "DELETE FROM autorizacion WHERE candidato = ?";
                     PreparedStatement preparedStatement = conexion.prepareStatement(sql);
                     preparedStatement.setString(1, candidato);
-                    int out = preparedStatement.executeUpdate();
+                    preparedStatement.executeUpdate();
                 }
             }
         }

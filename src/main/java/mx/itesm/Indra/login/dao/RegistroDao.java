@@ -20,9 +20,8 @@ public class RegistroDao implements IRegistroDao{
         String apellido_paterno = candidato.getPaterno();
         String apellido_materno = candidato.getMaterno();
 
-        // Nos conectamos a la base de datos y empezamos con las inserciones
         try {
-            // Nos conectamos a la base de datos
+            // Nos conectamos a la base de datos y empezamos con las inserciones
             Connection conexion = MySQLConnection.getConnection();
 
             // Creamos los preparedStament para los cuatro inserts
@@ -32,13 +31,14 @@ public class RegistroDao implements IRegistroDao{
             PreparedStatement ps_cuenta_interes = conexion.prepareStatement(insert_cuenta_interes);
 
             // Llenamos los ps con sus respectivos datos
-            // ------------- Se hace al inserción en la tabla Persona -------------
+            // ---------------- Se hace al inserción en la tabla Persona ----------------
             ps_persona.setString(1, candidato.getCurp());
             ps_persona.setString(2, candidato.getNombre());
             ps_persona.setString(3, apellido_paterno);
             ps_persona.setString(4, apellido_materno);
-            ps_persona.setLong(5, candidato.getTelefono());
+            ps_persona.setString(5, candidato.getTelefono());
             ps_persona.executeUpdate();
+
             // Para obtener el id_persona, hacemos una query con los datos ofrecidos
             String get_id_persona = "SELECT id_persona FROM persona WHERE curp = ? AND nombre = ? AND paterno = ? AND materno = ? AND telefono = ?";
             PreparedStatement ps_get_id_persona = conexion.prepareStatement(get_id_persona);
@@ -46,13 +46,13 @@ public class RegistroDao implements IRegistroDao{
             ps_get_id_persona.setString(2, candidato.getNombre());
             ps_get_id_persona.setString(3, apellido_paterno);
             ps_get_id_persona.setString(4, apellido_materno);
-            ps_get_id_persona.setString(5, Long.toString(candidato.getTelefono()));
+            ps_get_id_persona.setString(5, candidato.getTelefono());
             ResultSet rs_get_id_persona = ps_get_id_persona.executeQuery();
 
             // Una vez obtenido el id_persona, podemos hacer las demás queries
             if (rs_get_id_persona.next()) {
 
-                // ------------- Se hace la inserción de los datos en la tabla Cuenta -------------
+                // ---------------- Se hace la inserción de los datos en la tabla Cuenta ----------------
                 ps_cuenta.setInt(1, rs_get_id_persona.getInt("id_persona"));
                 ps_cuenta.setString(2, candidato.getCorreo());
                 ps_cuenta.setString(3, password);
@@ -76,7 +76,7 @@ public class RegistroDao implements IRegistroDao{
                     ResultSet rs_get_id_grado_academico = ps_get_id_grado_academico.executeQuery();
 
                     if (rs_get_id_grado_academico.next()) {
-                        // ------------- Se hace la inserción de los datos en la tabla cuenta_grado_academico -------------
+                        // ---------------- Se hace la inserción de los datos en la tabla cuenta_grado_academico ----------------
                         String primera_carrera = candidato.getPrimera_carrera();
                         String segunda_carrera = candidato.getSegunda_carrera();
                         ps_cuenta_grado.setInt(1, rs_get_id_cuenta.getInt("id_cuenta"));
@@ -102,6 +102,7 @@ public class RegistroDao implements IRegistroDao{
                             ps_cuenta_interes.setInt(2, rs_get_id_area_interes.getInt("id_area_interes"));
                             ps_cuenta_interes.executeUpdate();
 
+                            // Si todos los inserts se hacen correctamente, regresamos true
                             return true;
                         }
                     }
@@ -117,20 +118,22 @@ public class RegistroDao implements IRegistroDao{
     public static void main(String[] arg) {
         Candidato candidato = new Candidato();
 
-        candidato.setNombre("Josías");
-        candidato.setPaterno("González");
-        candidato.setMaterno("Lucas");
-        candidato.setCurp("GOLE010119HGRNCRA3");
-        candidato.setTelefono(53356742);
-        candidato.setCorreo("josias@gmail.com");
-        candidato.setInteres("Videjuegos");
-        candidato.setGrado_academico("Doctorado");
-        String password = "hola";
-        candidato.setPrimera_carrera("Licenciatura en Artes Musicales");
+        candidato.setNombre("Ricardo");
+        candidato.setPaterno("Zavaleta");
+        candidato.setMaterno("Vázquez");
+        candidato.setCurp("ZAVR950412HMSVZC03");
+        candidato.setTelefono("543234674");
+        candidato.setCorreo("ricardo@gmail.com");
+        candidato.setInteres("Arquitecto AWS");
+        candidato.setGrado_academico("Especialidad médica");
+        String password = "Zapatos1!";
+        candidato.setPrimera_carrera("Médico Cardiólogo");
+        candidato.setSegunda_carrera("Licenciatura en Administración");
 
         RegistroDao registroDao = new RegistroDao();
         try {
-            registroDao.registroCandidato(candidato, password);
+            boolean insert =  registroDao.registroCandidato(candidato, password);
+            System.out.println(insert);
         }
         catch (Exception ex){
             System.out.println(ex.getMessage());

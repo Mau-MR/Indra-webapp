@@ -24,29 +24,16 @@ public class LoginController extends HttpServlet {
         LoginDao loginDao = new LoginDao();
         //Verificar el tipo de usuario
         String tipo = loginDao.getUserType(correo);
-        System.out.println(correo);
-        System.out.println(password);
-        System.out.println(tipo);
         //Dividimos según el tipo de cuenta que sea, y después verificamos con el método verifyStatus si está habilitada
         switch (tipo) {
             case "administrador":
                 if (loginDao.verifyUser(correo, password)) {
+                    // Como la cuenta administrador nunca se va a poder deshabilitar, entonces se redirecciona automáticamente
                     Cuenta administrador = loginDao.verifyStatus(correo, password);
-                    if (administrador != null) {
-                        HttpSession sesion = request.getSession();
-                        sesion.setAttribute("administrador", administrador);
-                        sesion.removeAttribute("candidato");
-                        response.sendRedirect("administrador");
-                    }
-                    else {
-                        try {
-                            request.setAttribute("mensaje", "Cuenta inhabilitada");
-                            request.getRequestDispatcher("WEB-INF/index.jsp").forward(request, response);
-                        }
-                        catch (Exception ex) {
-                            System.out.println(ex.getMessage());
-                        }
-                    }
+                    HttpSession sesion = request.getSession();
+                    sesion.setAttribute("administrador", administrador);
+                    sesion.removeAttribute("candidato");
+                    response.sendRedirect("administrador");
                 }
                 else {
                     try {

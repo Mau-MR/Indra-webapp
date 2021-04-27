@@ -3,12 +3,13 @@ package mx.itesm.Indra.login.model;
 import java.io.Serializable;
 
 public class Candidato implements Serializable {
+    // Model del Candidato
 
     private String nombre;
     private String paterno;
     private String materno;
     private String curp;
-    private Long telefono;
+    private String telefono;
     private String correo;
     private int edad;
     private boolean status;
@@ -21,16 +22,16 @@ public class Candidato implements Serializable {
     private String segunda_carrera;
     private int score_inteligencia;
     private int score_trabajo;
-    //private int duracion;
+    private int duracion;
 
     public Candidato() {
 
     }
 
-    public Candidato(String nombre, String paterno, String materno, String curp, long telefono, String correo, int edad,
-                     boolean status, boolean acceso, String interes, String skill_inteligencia, String skill_trabajo,
-                     String grado_academico, String primera_carrera, String segunda_carrera, int score_inteligencia,
-                     int score_trabajo) {
+    public Candidato(String nombre, String paterno, String materno, String curp, String telefono, String correo,
+                     int edad, boolean status, boolean acceso, String interes, String skill_inteligencia,
+                     String skill_trabajo, String grado_academico, String primera_carrera, String segunda_carrera,
+                     int score_inteligencia, int score_trabajo, int duracion) {
         this.nombre = nombre;
         this.paterno = paterno;
         this.materno = materno;
@@ -48,6 +49,7 @@ public class Candidato implements Serializable {
         this.segunda_carrera = segunda_carrera;
         this.score_inteligencia = score_inteligencia;
         this.score_trabajo = score_trabajo;
+        this.duracion = duracion;
     }
 
     public String getNombre() {
@@ -82,11 +84,11 @@ public class Candidato implements Serializable {
         this.curp = curp;
     }
 
-    public long getTelefono() {
+    public String getTelefono() {
         return telefono;
     }
 
-    public void setTelefono(long telefono) {
+    public void setTelefono(String telefono) {
         this.telefono = telefono;
     }
 
@@ -186,6 +188,14 @@ public class Candidato implements Serializable {
         this.score_trabajo = score_trabajo;
     }
 
+    public int getDuracion() {
+        return duracion;
+    }
+
+    public void setDuracion(int duracion) {
+        this.duracion = duracion;
+    }
+
     @Override
     public String toString() {
         return "Candidato{" +
@@ -193,7 +203,7 @@ public class Candidato implements Serializable {
                 ", paterno='" + paterno + '\'' +
                 ", materno='" + materno + '\'' +
                 ", curp='" + curp + '\'' +
-                ", telefono=" + telefono +
+                ", telefono='" + telefono + '\'' +
                 ", correo='" + correo + '\'' +
                 ", edad=" + edad +
                 ", status=" + status +
@@ -206,6 +216,7 @@ public class Candidato implements Serializable {
                 ", segunda_carrera='" + segunda_carrera + '\'' +
                 ", score_inteligencia=" + score_inteligencia +
                 ", score_trabajo=" + score_trabajo +
+                ", duracion=" + duracion +
                 '}';
     }
 }

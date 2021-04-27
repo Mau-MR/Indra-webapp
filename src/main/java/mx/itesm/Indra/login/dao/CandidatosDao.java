@@ -51,9 +51,11 @@ public class CandidatosDao implements ICandidatosDao {
             resultado de inteligencia emocional y trabajo bajo presion
             score_inteligencia
             score_trabajo
+            duracion
          */
         String sql_resultado = "SELECT ri.descripcion AS inteligencia_emocional, ri.valor AS score_inteligencia, rt.descripcion AS trabajo_presion, " +
-                "rt.valor AS score_trabajo  FROM resultado ri, resultado rt WHERE ri.id_cuenta = ? AND ri.id_softskill = 1 AND rt.id_cuenta = ? AND rt.id_softskill = 2";
+                "rt.valor AS score_trabajo, ri.duracion AS duracion  FROM resultado ri, resultado rt WHERE ri" +
+                ".id_cuenta = ? AND ri.id_softskill = 1 AND rt.id_cuenta = ? AND rt.id_softskill = 2";
         /*
             Acceso -> Si tiene acceso para hacer el juego
          */
@@ -97,11 +99,13 @@ public class CandidatosDao implements ICandidatosDao {
                     String trabajo_presion = "....";
                     int score_inteligencia = 0;
                     int score_trabajo = 0;
+                    int duracion = 0;
                     if (rs_resultado.next()) {
                         inteligencia_emocional = rs_resultado.getString("inteligencia_emocional");
                         trabajo_presion = rs_resultado.getString("trabajo_presion");
                         score_inteligencia = rs_resultado.getInt("score_inteligencia");
                         score_trabajo = rs_resultado.getInt("score_trabajo");
+                        duracion = rs_resultado.getInt("duracion");
                     }
 
                     //Verificamos si el candidato tiene acceso para hacer el juego, si no, llenamos el acceso con false
@@ -129,7 +133,7 @@ public class CandidatosDao implements ICandidatosDao {
                     String paterno = rs_persona_cuenta.getString("paterno");
                     String materno = rs_persona_cuenta.getString("materno");
                     String curp = rs_persona_cuenta.getString("curp");
-                    int telefono = rs_persona_cuenta.getInt("telefono");
+                    String telefono = rs_persona_cuenta.getString("telefono");
                     String correo = rs_persona_cuenta.getString("correo");
                     boolean status = rs_persona_cuenta.getBoolean("status");
                     String area_interes = rs_area_interes.getString("area_interes");
@@ -154,7 +158,8 @@ public class CandidatosDao implements ICandidatosDao {
                             primera_carrera,
                             segunda_carrera,
                             score_inteligencia,
-                            score_trabajo
+                            score_trabajo,
+                            duracion
 
                     );
                     candidatosList.add(candidato);

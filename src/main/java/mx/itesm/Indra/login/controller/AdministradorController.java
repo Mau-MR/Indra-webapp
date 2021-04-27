@@ -25,7 +25,7 @@ public class AdministradorController extends HttpServlet {
                 List<Candidato> candidatosList = candidatosDao.cargarCandidatos();
                 request.setAttribute("candidatosList", candidatosList);
 
-                //Obtenemos el nombre a partir de obtener el objeto de la sesion de tipo de Cuenta y lo mandamos al jsp
+                // Obtenemos el nombre a partir de obtener el objeto de la sesion de tipo de Cuenta y lo mandamos al jsp
                 LoginDao loginDao = new LoginDao();
                 Cuenta admin = (Cuenta) sesion.getAttribute("administrador");
                 request.setAttribute("id_cuenta", admin.getId_cuenta());
@@ -35,6 +35,7 @@ public class AdministradorController extends HttpServlet {
                 request.getRequestDispatcher("WEB-INF/homeAdministrador.jsp").forward(request, response);
             }
             else {
+                // En dado caso que no sea así, no se le permite iniciar sesión
                 request.setAttribute("mensaje", "No tienes acceso, inicia sesión");
                 request.getRequestDispatcher("WEB-INF/index.jsp").forward(request, response);
             }
@@ -46,6 +47,7 @@ public class AdministradorController extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        // Para dar autorización a un candidato para que pueda iniciar sesión
         String curp = request.getParameter("curp");
         String minsait = request.getParameter("minsait");
         boolean action = Boolean.parseBoolean(request.getParameter("action"));
@@ -53,6 +55,7 @@ public class AdministradorController extends HttpServlet {
         AutorizarDao autorizarDao = new AutorizarDao();
         autorizarDao.autorizacion(curp, minsait, action);
 
+        // Regresa un "OK" al autorizacion.js
         PrintWriter out = response.getWriter();
         out.println("OK");
     }

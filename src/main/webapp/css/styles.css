@@ -60,11 +60,33 @@ input::-ms-reveal, input::-ms-clear {
 /* Index */
 /* Valid Inputs */
 pre {
+    visibility: hidden;
     position: fixed;
     padding: 0;
     margin: 0;
     width: 32rem;
     text-align: center;
+}
+@media (min-width: 1080px) {
+    pre {
+        visibility: visible;
+
+    }
+}
+.Login__span {
+    font-size: 1.2rem;
+    color:rgba(255, 0, 0, 0.74);
+    margin-top: 0.5rem;
+
+}
+@media (min-width: 768px) {
+    .Login__span {
+        font-size: 1.4rem;
+
+    }
+}
+#register {
+    padding: 1.2rem 2rem;
 }
 .resultado {
     padding: 0;

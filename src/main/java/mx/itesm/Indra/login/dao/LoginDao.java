@@ -13,6 +13,8 @@ public class LoginDao implements ILoginDao{
 
     @Override
     public boolean verifyUser(String correo, String password) {
+        // Verificamos si el usuario existe en la tabla cuenta
+
         String sql = "SELECT COUNT(*) FROM cuenta WHERE correo = ? AND password = SHA2(?,224)";
 
         try {
@@ -39,6 +41,7 @@ public class LoginDao implements ILoginDao{
 
     @Override
     public String getUserType(String correo) {
+        // Obtenemos el tipo de usuario según el rol: "Candidato" o "Administrador"
         String sql = "SELECT nombre AS tipo FROM rol WHERE id_rol = ( SELECT id_rol FROM cuenta WHERE correo = ?)";
 
         try {
@@ -65,6 +68,8 @@ public class LoginDao implements ILoginDao{
 
     @Override
     public Cuenta verifyStatus(String correo, String password) {
+        // Verificamos si el usuario está autorizado para ingresar, ya sea "administrador" o "candidato"
+
         Cuenta cuenta = null; //Inicializamos un instancia de tipo Cuenta como null
         String sql = "SELECT id_cuenta, id_rol, id_persona, correo, password, status FROM cuenta WHERE correo = ? AND password = SHA2(?, 224)";
 
@@ -86,8 +91,27 @@ public class LoginDao implements ILoginDao{
                 cuenta.setId_rol(resultSet.getInt("id_rol"));
                 cuenta.setId_persona(resultSet.getInt("id_persona"));
                 //Una vez llenado la instancia de Cuenta, verificamos si el status es aprobatorio para redireccionar a su respectiva página, si no, regresamos null
-                if (cuenta.getStatus()) {
+                if (cuenta.getId_rol() == 1) {
+                    // Si la cuenta es de tipo administrador regresamos la cuenta
                     return cuenta;
+                }
+                else if (cuenta.getId_rol() == 2) {
+                    //Verificamos si la cuenta de rol Candidato tiene autorización para redireccionar
+                    System.out.println(resultSet.getInt("id_cuenta"));
+                    System.out.println(cuenta.getId_rol());
+
+                    String autorizacion = "SELECT * FROM autorizacion WHERE candidato = ?";
+                    PreparedStatement ps_autorizacion = conexion.prepareStatement(autorizacion);
+                    ps_autorizacion.setInt(1, resultSet.getInt("id_cuenta"));
+                    ResultSet rs_autorizacion = ps_autorizacion.executeQuery();
+
+                    // Si el candidato está en la tabla Autorización regresamos la cuenta
+                    if (rs_autorizacion.next()) {
+                        return cuenta;
+                    }
+                    else {
+                        return null;
+                    }
                 }
                 else {
                     return null;
@@ -102,9 +126,10 @@ public class LoginDao implements ILoginDao{
     }
 
     public String getName(Cuenta cuenta) {
+        // Obtenemos el nombre de una persona según su id
+
         String nombre = "";
-        String sql = "SELECT nombre FROM persona WHERE id_persona IN (SELECT id_persona FROM cuenta WHERE id_persona " +
-                "= ?)";
+        String sql = "SELECT nombre FROM persona WHERE id_persona IN (SELECT id_persona FROM cuenta WHERE id_persona = ?)";
 
         try {
             Connection conexion = MySQLConnection.getConnection();
@@ -120,5 +145,12 @@ public class LoginDao implements ILoginDao{
             System.out.println(ex.getMessage());
         }
         return nombre;
+    }
+
+    public static void main(String[] arg) {
+
+
+
+
     }
 }

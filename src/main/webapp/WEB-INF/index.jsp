@@ -41,6 +41,7 @@
                         <input type="password" name="user-password" id="password" autocomplete="off">
                         <i class="fas fa-eye" id="togglePassword"></i>
                     </div>
+                    <span class="Login__span">${mensaje}</span>
                 </div>
 
                 <div class="buttons-login">
