@@ -7,8 +7,8 @@ import java.sql.DriverManager;
 
 public class MySQLConnection {
     public static Connection getConnection() {
-        String cadena = "jdbc:mysql://Localhost:3306/traum?user=root"; // &password=root
-        //String cadena = "jdbc:mysql://35.230.11.123:3306/traum?user=traumAdmin&password=Traum12345";
+        //String cadena = "jdbc:mysql://Localhost:3306/traum?user=root"; // &password=root
+        String cadena = "jdbc:mysql://35.230.11.123:3306/traum?user=traumAdmin&password=Traum12345";
         Connection conexion = null;
         try {
             DriverManager.registerDriver(new Driver());

@@ -23,6 +23,9 @@
     <!-- SweetAlert2 -->
     <script type="text/javascript" charset="utf8" src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
 
+    <!-- Chart.js -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
     <!-- Tables -->
     <link rel="stylesheet" href="https://cdn.datatables.net/1.10.24/css/jquery.dataTables.min.css">
     <link rel="stylesheet" href="https://cdn.datatables.net/responsive/2.2.7/css/responsive.dataTables.min.css">
@@ -88,7 +91,7 @@
             dom: 'Bfrtip',
             select: true,
             scrollY: '50vh',
-            scrollX: '50vh',
+            scrollX: '50vw',
             scrollCollapse: true,
             paging: false,
             ordering: false,
@@ -163,14 +166,15 @@
             <div class="space text-justify">
                 <th><i class="fas fa-info-circle" style="font-size:1.6rem;"></i></th>
                 <th><i class="fas fa-lock-open" style="font-size:1.6rem;"></i></th>
+                <th><i class="fas fa-gamepad" style="font-size:1.6rem;"></i></th>
                 <th>Acceso</th>
                 <th>Nombre</th>
                 <th>Apellido paterno</th>
                 <th>Apellido materno</th>
-                <th>Correo</th>
                 <th>Juego realizado</th>
                 <th>Inteligencia emocional</th>
                 <th>Trabajo bajo presión</th>
+                <th>Correo</th>
                 <th>Área de interés</th>
                 <th>Número telefónico</th>
                 <th>CURP</th>
@@ -199,6 +203,10 @@
                         </c:when>
                     </c:choose>
                 </div>
+            </td>
+            <td id="${candidato.curp}" class="minTable-container" style="color: var(--mainColor);"
+                onclick="modalDisplay(this.id, ${candidato.score_inteligencia}, ${candidato.score_trabajo})">
+                <a href="#" class="file minTable-container"><i class="fas fa-id-card-alt"></i></a>
             </td>
             <!--Ends box-->
             <td class="${candidato.curp}">
@@ -247,7 +255,35 @@
             <!--Ends box-->
             <td>${candidato.segunda_carrera}</td>
             <!--Ends box-->
-            <td>1 hora</td>
+            <td>${candidato.duracion}</td>
+            <!--Ends box-->
+            <div id="modal-container-p_${candidato.curp}" class="modal-container-p">
+                <div id="modal-p_${candidato.curp}" class="modal-p modal-close-p">
+                    <p class="close-p" onclick="closeModal()">X</p>
+                    <div class="modal-text-p" style="font-family: 'Roboto-Regular', sans-serif; width: 90%; display:
+                    flex">
+                        <div>
+                            <h2 style="color: black">Datos del candidato</h2>
+                            <p>${candidato.nombre} ${candidato.paterno} ${candidato.materno}</p>
+                        </div>
+
+                        <c:choose>
+                            <c:when test="${candidato.score_inteligencia > 0}">
+                                <div style="width: 13vw;">
+                                    <canvas id="inteligencia_canva_${candidato.curp}"></canvas>
+                                </div>
+                                <div style="width: 13vw;">
+                                    <canvas id="trabajo_canva_${candidato.curp}"></canvas>
+                                </div>
+                                <div style="width: 30vw;">
+                                    <canvas id="comparacion_canva_${candidato.curp}"></canvas>
+                                </div>
+                            </c:when>
+                        </c:choose>
+
+                    </div> <!-- Ends modal-text-p-->
+                </div>
+            </div>
             <!--Ends box-->
         </tr>
         <!--Ends row-->
@@ -256,5 +292,8 @@
     </table>
 </main>
 </body>
+<script src="${pageContext.request.contextPath}/js/charts.js"></script>
 <script src="${pageContext.request.contextPath}/js/autorizacion.js"></script>
+<script src="${pageContext.request.contextPath}/js/modal-page.js"></script>
+
 </html>

@@ -139,7 +139,6 @@ public class CandidatosDao implements ICandidatosDao {
                     String area_interes = rs_area_interes.getString("area_interes");
                     String grado_academico = rs_grado_academico.getString("grado_academico");
 
-
                     //Llenamos un objeto de tipo Candidato y lo añadimos al arreglo
                     Candidato candidato = new Candidato(
                             nombre,
