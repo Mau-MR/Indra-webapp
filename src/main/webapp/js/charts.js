@@ -25,6 +25,10 @@ function createCharts(score_inteligencia, score_trabajo, id) {
                     display: true,
                     text: 'Inteligencia Emocional'
                 }
+            },
+            animation: {
+                duration: 2500,
+                easing: 'easeInOutQuart',
             }
 
         }
@@ -61,6 +65,10 @@ function createCharts(score_inteligencia, score_trabajo, id) {
                     display: true,
                     text: 'Trabajo bajo presión'
                 }
+            },
+            animation: {
+                duration: 2500,
+                easing: 'easeInOutQuart',
             }
         }
     };
@@ -77,7 +85,7 @@ function createCharts(score_inteligencia, score_trabajo, id) {
             'Trabajo Bajo Presión'
         ],
         datasets: [{
-            label: 'Comparación entre Softskills',
+            label: 'Comparativa entre Softskills por porcentaje',
             data: [(score_inteligencia * 100) / 42, (score_trabajo * 100) / 40],
             backgroundColor: [
                 'rgb(170, 216, 211)',
@@ -97,8 +105,13 @@ function createCharts(score_inteligencia, score_trabajo, id) {
         options: {
             scales: {
                 y: {
-                    beginAtZero: true
+                    beginAtZero: true,
+                    max: 100
                 }
+            },
+            animation: {
+                duration: 3000,
+                easing: 'easeOutBounce',
             }
         },
     };

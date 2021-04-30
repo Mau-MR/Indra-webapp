@@ -56,7 +56,7 @@ public class LoginController extends HttpServlet {
                     }
                     else {
                         try {
-                            request.setAttribute("mensaje", "La cuenta está inhabilitada");
+                            request.setAttribute("mensaje", "No tiene acceso para acceder");
                             request.getRequestDispatcher("WEB-INF/index.jsp").forward(request, response);
                         }
                         catch (Exception ex) {

@@ -107,7 +107,12 @@ public class LoginDao implements ILoginDao{
 
                     // Si el candidato está en la tabla Autorización regresamos la cuenta
                     if (rs_autorizacion.next()) {
-                        return cuenta;
+                        if (!cuenta.getStatus()) {
+                            return cuenta;
+                        }
+                        else {
+                            return null;
+                        }
                     }
                     else {
                         return null;

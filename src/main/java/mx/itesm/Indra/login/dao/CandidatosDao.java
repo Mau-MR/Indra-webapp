@@ -61,6 +61,21 @@ public class CandidatosDao implements ICandidatosDao {
          */
         String sql_acceso = "SELECT * FROM autorizacion WHERE candidato = ?";
 
+        /*
+            Preguntas
+            Respuestas
+            Tiempo de respuesta
+         */
+        String sql_respuestas = "SELECT r.id_dialogo tiempo, nombre, d.texto as situation, r.texto as answer " +
+                                    "FROM parcial p JOIN respuesta r ON p.id_respuesta = r.id_respuesta " +
+                                                   "JOIN dialogo d ON d.id_dialogo = r.id_dialogo " +
+                                                   "JOIN softskill s ON d.id_softskill = s.id_softskill WHERE p.id_cuenta = ?";
+
+        /*
+            Número de actividades realizadas
+         */
+        String sql_actividades = "SELECT * FROM actividades WHERE id_cuenta = ?";
+
         try {
             Connection conexion = MySQLConnection.getConnection();
             PreparedStatement ps_persona_cuenta = conexion.prepareStatement(sql_persona_cuenta);
@@ -69,6 +84,8 @@ public class CandidatosDao implements ICandidatosDao {
             PreparedStatement ps_carreras = conexion.prepareStatement(sql_carreras);
             PreparedStatement ps_resultado = conexion.prepareStatement(sql_resultado);
             PreparedStatement ps_acceso = conexion.prepareStatement(sql_acceso);
+            PreparedStatement ps_respuestas = conexion.prepareStatement(sql_respuestas);
+            PreparedStatement ps_actividades = conexion.prepareStatement(sql_actividades);
 
             // Obtenemos el id_cuenta para las demás queries
             ResultSet rs_persona_cuenta = ps_persona_cuenta.executeQuery();
@@ -84,6 +101,8 @@ public class CandidatosDao implements ICandidatosDao {
                 ps_resultado.setString(1, rs_persona_cuenta.getString("id_cuenta"));
                 ps_resultado.setString(2, rs_persona_cuenta.getString("id_cuenta"));
                 ps_acceso.setString(1, rs_persona_cuenta.getString("id_cuenta"));
+                ps_respuestas.setString(1, rs_persona_cuenta.getString("id_cuenta"));
+                ps_actividades.setString(1, rs_persona_cuenta.getString("id_cuenta"));
 
 
                 // Ejecutamos las queries
@@ -92,9 +111,11 @@ public class CandidatosDao implements ICandidatosDao {
                 ResultSet rs_carreras = ps_carreras.executeQuery();
                 ResultSet rs_resultado = ps_resultado.executeQuery();
                 ResultSet rs_acceso = ps_acceso.executeQuery();
+                ResultSet rs_respuestas = ps_respuestas.executeQuery();
+                ResultSet rs_actividades = ps_actividades.executeQuery();
 
                 if (rs_area_interes.next() & rs_grado_academico.next()) {
-                    //Verificamos si hay resultados, si hay, se llena, si no se llena con "...."
+                    // Verificamos si hay resultados, si hay, se llena, si no se llena con "...."
                     String inteligencia_emocional = "....";
                     String trabajo_presion = "....";
                     int score_inteligencia = 0;
@@ -108,11 +129,31 @@ public class CandidatosDao implements ICandidatosDao {
                         duracion = rs_resultado.getInt("duracion");
                     }
 
-                    //Verificamos si el candidato tiene acceso para hacer el juego, si no, llenamos el acceso con false
-                    boolean acceso = false;
-                    if (rs_acceso.next()) {
-                        acceso = true;
+                    // Obtenemos las preguntas, y respuestas con su tiempo, según el candidato haya contestado
+                    String[] preguntas = new String[26];
+                    String[] respuestas = new String[26];
+                    String[] tiempos = new String[26];
+                    int i = 0;
+                    while (rs_respuestas.next()) {
+                        preguntas[i] = rs_respuestas.getString("situation");
+                        respuestas[i] = rs_respuestas.getString("answer");
+                        tiempos[i] = rs_respuestas.getString("tiempo");
+
+                        System.out.println("Pregunta " + i + ": " + preguntas[i]);
+                        System.out.println("Respuesta: " + respuestas[i]);
+                        System.out.println("Tiempo: " + tiempos[i]);
+
+                        i++;
                     }
+
+                    int actividades = 0;
+                    if (rs_actividades.next()) {
+                        actividades = rs_actividades.getInt("activities_done");
+                    }
+
+
+                    // Verificamos si el candidato tiene acceso para hacer el juego, si no, llenamos el acceso con false
+                    boolean acceso = rs_acceso.next();
 
 
                     //Verificamos si tiene una carrera
@@ -147,7 +188,6 @@ public class CandidatosDao implements ICandidatosDao {
                             curp,
                             telefono,
                             correo,
-                            23,
                             status,
                             acceso,
                             area_interes,
@@ -158,7 +198,11 @@ public class CandidatosDao implements ICandidatosDao {
                             segunda_carrera,
                             score_inteligencia,
                             score_trabajo,
-                            duracion
+                            duracion,
+                            preguntas,
+                            respuestas,
+                            tiempos,
+                            actividades
 
                     );
                     candidatosList.add(candidato);
@@ -172,10 +216,10 @@ public class CandidatosDao implements ICandidatosDao {
     }
 
     public static void main(String[] arg) {
-        String cadena = "545234567446727353";
-        long telefono = Long.parseLong(cadena);
+        String[] cadena = new String[2];
+        cadena[0] = "hola";
 
-        System.out.println(telefono);
+        System.out.println(cadena[1]);
 
     }
 }
