@@ -7,7 +7,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="shortcut icon" href="${pageContext.request.contextPath}/img/favicon.ico">
-    <title>Game</title>
+    <title>Inicia Sesión</title>
 
     <link rel="preload" href="${pageContext.request.contextPath}/css/normalize.css" as="style">
     <link rel="stylesheet" href="${pageContext.request.contextPath}/css/normalize.css">
@@ -30,7 +30,6 @@
         <div class="login-container">
             <div class="img-login">
                 <img src="${pageContext.request.contextPath}/img/logominsaitBlanco.svg" alt="Logo Indra">
-                <p>Prueba psicometrica</p>
             </div>
             <form action="login" method="POST" class="login-form"> <!-- Starts LoginAction -->
                 <div class="input-login">
@@ -172,7 +171,7 @@
                                         <label for="career">Carrera:</label>
                                         <input type="text" id="career" name="career" placeholder="Opcional">
                                     </div>
-                                    <div class="item-grid" id="i">
+                                    <div class="item-grid" id="">
                                         <label for="Secondcareer">Segunda carrera:</label>
                                         <input type="text" id="Secondcareer" name="Secondcareer" placeholder="Opcional">
                                     </div>

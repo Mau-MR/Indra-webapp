@@ -1,6 +1,7 @@
 package mx.itesm.Indra.login.model;
 
 import java.io.Serializable;
+import java.util.Arrays;
 
 public class Candidato implements Serializable {
     // Model del Candidato
@@ -11,7 +12,6 @@ public class Candidato implements Serializable {
     private String curp;
     private String telefono;
     private String correo;
-    private int edad;
     private boolean status;
     private boolean acceso;
     private String interes;
@@ -23,22 +23,26 @@ public class Candidato implements Serializable {
     private int score_inteligencia;
     private int score_trabajo;
     private int duracion;
+    private String[] preguntas = new String[26];
+    private String[] respuestas = new String[26];
+    private String[] tiempos = new String[26];
+    private int actividades;
 
     public Candidato() {
 
     }
 
-    public Candidato(String nombre, String paterno, String materno, String curp, String telefono, String correo,
-                     int edad, boolean status, boolean acceso, String interes, String skill_inteligencia,
+    public Candidato(String nombre, String paterno, String materno, String curp, String telefono,
+                     String correo, boolean status, boolean acceso, String interes, String skill_inteligencia,
                      String skill_trabajo, String grado_academico, String primera_carrera, String segunda_carrera,
-                     int score_inteligencia, int score_trabajo, int duracion) {
+                     int score_inteligencia, int score_trabajo, int duracion, String[] preguntas, String[] respuestas,
+                     String[] tiempos, int actividades) {
         this.nombre = nombre;
         this.paterno = paterno;
         this.materno = materno;
         this.curp = curp;
         this.telefono = telefono;
         this.correo = correo;
-        this.edad = edad;
         this.status = status;
         this.acceso = acceso;
         this.interes = interes;
@@ -50,6 +54,10 @@ public class Candidato implements Serializable {
         this.score_inteligencia = score_inteligencia;
         this.score_trabajo = score_trabajo;
         this.duracion = duracion;
+        this.preguntas = preguntas;
+        this.respuestas = respuestas;
+        this.tiempos = tiempos;
+        this.actividades = actividades;
     }
 
     public String getNombre() {
@@ -98,14 +106,6 @@ public class Candidato implements Serializable {
 
     public void setCorreo(String correo) {
         this.correo = correo;
-    }
-
-    public int getEdad() {
-        return edad;
-    }
-
-    public void setEdad(int edad) {
-        this.edad = edad;
     }
 
     public boolean isStatus() {
@@ -196,6 +196,38 @@ public class Candidato implements Serializable {
         this.duracion = duracion;
     }
 
+    public String[] getPreguntas() {
+        return preguntas;
+    }
+
+    public void setPreguntas(String[] preguntas) {
+        this.preguntas = preguntas;
+    }
+
+    public String[] getRespuestas() {
+        return respuestas;
+    }
+
+    public void setRespuestas(String[] respuestas) {
+        this.respuestas = respuestas;
+    }
+
+    public String[] getTiempos() {
+        return tiempos;
+    }
+
+    public void setTiempos(String[] tiempos) {
+        this.tiempos = tiempos;
+    }
+
+    public int getActividades() {
+        return actividades;
+    }
+
+    public void setActividades(int actividades) {
+        this.actividades = actividades;
+    }
+
     @Override
     public String toString() {
         return "Candidato{" +
@@ -205,7 +237,6 @@ public class Candidato implements Serializable {
                 ", curp='" + curp + '\'' +
                 ", telefono='" + telefono + '\'' +
                 ", correo='" + correo + '\'' +
-                ", edad=" + edad +
                 ", status=" + status +
                 ", acceso=" + acceso +
                 ", interes='" + interes + '\'' +
@@ -217,6 +248,10 @@ public class Candidato implements Serializable {
                 ", score_inteligencia=" + score_inteligencia +
                 ", score_trabajo=" + score_trabajo +
                 ", duracion=" + duracion +
+                ", preguntas=" + Arrays.toString(preguntas) +
+                ", respuestas=" + Arrays.toString(respuestas) +
+                ", tiempos=" + Arrays.toString(tiempos) +
+                ", actividades=" + actividades +
                 '}';
     }
 }

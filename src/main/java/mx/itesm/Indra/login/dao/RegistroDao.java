@@ -15,6 +15,7 @@ public class RegistroDao implements IRegistroDao{
         String insert_cuenta = "INSERT INTO cuenta(id_rol, id_persona, correo, password, status) VALUES (2, ?, ?, SHA2(?, 224), ?)";
         String insert_cuenta_grado = "INSERT INTO cuenta_grado_academico(id_cuenta, id_grado_academico, carrera) VALUES(?, ?, ?)";
         String insert_cuenta_interes = "INSERT INTO cuenta_area_interes(id_cuenta, id_area_interes) VALUES(?, ?)";
+        String insert_actividades = "INSERT INTO actividades(activities_done, id_cuenta) VALUES(0, ?)";
 
         // El apellido tiene el paterno y el materno, entonces lo dividimos según el espacio que hay entre ellos
         String apellido_paterno = candidato.getPaterno();
@@ -29,6 +30,7 @@ public class RegistroDao implements IRegistroDao{
             PreparedStatement ps_cuenta = conexion.prepareStatement(insert_cuenta);
             PreparedStatement ps_cuenta_grado = conexion.prepareStatement(insert_cuenta_grado);
             PreparedStatement ps_cuenta_interes = conexion.prepareStatement(insert_cuenta_interes);
+            PreparedStatement ps_actividades = conexion.prepareStatement(insert_actividades);
 
             // Llenamos los ps con sus respectivos datos
             // ---------------- Se hace al inserción en la tabla Persona ----------------
@@ -83,6 +85,11 @@ public class RegistroDao implements IRegistroDao{
                         ps_cuenta_grado.setInt(2, rs_get_id_grado_academico.getInt("id_grado_academico"));
                         ps_cuenta_grado.setString(3, primera_carrera);
                         ps_cuenta_grado.executeUpdate();
+
+                        // ---------------- Se hace la inserción en la tabla actividades ----------------
+                        // Necesario para el juego
+                        ps_actividades.setInt(1, rs_get_id_cuenta.getInt("id_cuenta"));
+                        ps_actividades.executeUpdate();
 
                         // Si existe otra carrera, ejecutamos la misma executeUpdate
                         if (segunda_carrera != null) {

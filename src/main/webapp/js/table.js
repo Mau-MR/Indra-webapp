@@ -1,139 +1,74 @@
-// Main
 $(document).ready(function () {
-    $('#example').DataTable({
-        dom: 'Bfrtip',
-        select:         true,
-        scrollY:        '50vh',
-        scrollX:        '50vh',
+    $("#example").DataTable({
+        dom: "Bfrtip",
+        select: true,
+        scrollY: "60vh",
+        scrollX: "50vw",
         scrollCollapse: true,
-        paging:         false,
-        ordering:       false,
-        "language": {
-            "url": "//cdn.datatables.net/plug-ins/9dcbecd42ad/i18n/Spanish.json"
+        paging: false,
+        ordering: false,
+        language: {
+            url: "//cdn.datatables.net/plug-ins/9dcbecd42ad/i18n/Spanish.json",
         },
         responsive: {
             details: {
-                display: $.fn.dataTable.Responsive.display.modal({
-                    header: function (row) {
-                        var data = row.data();
-                        return 'Detalles de ' + data[0] + ' ' + data[1];
-                        buttons: [
-                            { extend: 'copy', text: 'Copiar' },
-                            { extend: 'pdf', text: 'Exportar en PDF', title: 'Lista de candidatos para Minsait',
-                                customize: function(doc) {
-                                    doc.defaultStyle.alignment = 'center';
-                                    doc.styles.tableHeader.alignment = 'center';
-                                }
-                            }
-                        ]
-                    }
-                }),
-                renderer: $.fn.dataTable.Responsive.renderer.tableAll({
-                    tableClass: 'table'
-                })
+                renderer: function (api, rowIdx, columns) {
+                    var data = $.map(columns, function (col, i) {
+                        return col.hidden ?
+                            '<tr data-dt-row="' + col.rowIndex + '" data-dt-column="' + col.columnIndex + '">' +
+                            '<td>' + col.title + ':' + '</td>' +
+                            '<td>' + col.data + '</td>' +
+                            '</tr>' :
+                            '';
+                    }).join('');
+
+                    return data ?
+                        $('<table/>').append(data) :
+                        false;
+                }
             }
         },
         buttons: [
             { extend: 'copy', text: 'Copiar' },
-            { extend: 'pdf', text: 'Exportar en PDF', title: 'Lista de candidatos para Minsait',
-                customize: function(doc) {
+            {
+                extend: 'pdfHtml5',
+                text: 'Exportar en PDF',
+                title: 'Lista de candidatos para Minsait',
+                customize: function (doc) {
                     doc.defaultStyle.alignment = 'center';
                     doc.styles.tableHeader.alignment = 'center';
-                }
+                    doc.styles.tableBodyEven.alignment = 'center';
+                    doc.styles.tableBodyOdd.alignment = 'center';
+                },
+                orientation: 'landscape',
+                pageSize: 'LEGAL',
             },
-            { extend: 'csv', text: 'Exportar en CSV'},
-            { extend: 'excel', text: 'Exportar en Excel'},
+            {
+                extend: 'csv',
+                text: 'Exportar en CSV',
+                charset: 'UTF-8',
+                fieldSeparator: ';',
+                bom: true,
+                filename: 'Lista de Candidatos Minsait',
+            },
+            {
+                extend: 'excel',
+                text: 'Exportar en Excel',
+                charset: 'UTF-8',
+                fieldSeparator: ';',
+                bom: true,
+                filename: 'Lista de Candidatos Minsait',
+            },
             {
                 extend: 'print',
                 text: 'Imprimir todo (no solo seleccionados)',
                 title: 'Lista de candidatos para Minsait',
                 exportOptions: {
                     modifier: {
-                        selected: null
+                        selected: null,
                     }
                 }
             }
         ]
     });
 });
-/*$(document).ready(function () {
-  $('#example').DataTable({
-    dom: 'Bfrtip',
-    select: true,
-    scrollY: '50vh',
-    scrollX: '50vh',
-    customize: function (doc) {
-      doc.defaultStyle.word = 'break-all';
-      doc.styles.tableHeader.alignment = 'center';
-    },
-    scrollCollapse: true,
-    paging: false,
-    "language": {
-      "url": "//cdn.datatables.net/plug-ins/9dcbecd42ad/i18n/Spanish.json"
-    },
-    buttons: [
-      { extend: 'copy', text: 'Copiar' },
-      {
-        extend: 'pdf', text: 'Exportar en PDF', title: 'Lista de candidatos para Minsait',
-        customize: function (doc) {
-          doc.defaultStyle.alignment = 'center';
-          doc.styles.tableHeader.alignment = 'center';
-        }
-      },
-      {
-        extend: 'csv', text: 'Exportar en CSV',
-        charset: 'UTF-8',
-        //fieldSeparator: ';',
-        bom: true,
-        filename: 'Csv Minsait Candidatos',
-        title: 'Csv Minsait Candidatos'
-      },
-      {
-        extend: 'excel', text: 'Exportar en Excel',
-        charset: 'UTF-8',
-        //fieldSeparator: ';',
-        bom: true,
-        filename: 'Excel Minsait Candidatos',
-        title: 'Excel Minsai tCandidatos'
-      },
-      {
-        extend: 'print',
-        text: 'Imprimir todo (no solo seleccionados)',
-        title: 'Lista de candidatos para Minsait',
-        exportOptions: {
-          modifier: {
-            selected: null
-          }
-        }
-      }
-    ]
-  });
-});
-
-// Modal
-$(document).ready(function () {
-  $("#example1").DataTable({
-    dom: "Bfrtip",
-    buttons: [
-      { extend: "copy", text: "Copiar" },
-      {
-        extend: "pdf",
-        text: "Exportar en PDF",
-        title: "Lista de candidatos para Minsait",
-        customize: function (doc) {
-          doc.defaultStyle.alignment = "center";
-          doc.styles.tableHeader.alignment = "center";
-        },
-      },
-    ],
-    scrollY: "50vh",
-    scrollX: "50vh",
-    scrollCollapse: true,
-    paging: false,
-    ordering: false,
-    language: {
-      url: "//cdn.datatables.net/plug-ins/9dcbecd42ad/i18n/Spanish.json",
-    },
-  });
-});
-*/
