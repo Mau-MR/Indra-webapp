@@ -66,7 +66,7 @@ public class CandidatosDao implements ICandidatosDao {
             Respuestas
             Tiempo de respuesta
          */
-        String sql_respuestas = "SELECT r.id_dialogo tiempo, nombre, d.texto as situation, r.texto as answer " +
+        String sql_respuestas = "SELECT tiempo, nombre, d.texto as situation, r.texto as answer " +
                                     "FROM parcial p JOIN respuesta r ON p.id_respuesta = r.id_respuesta " +
                                                    "JOIN dialogo d ON d.id_dialogo = r.id_dialogo " +
                                                    "JOIN softskill s ON d.id_softskill = s.id_softskill WHERE p.id_cuenta = ?";
@@ -139,12 +139,10 @@ public class CandidatosDao implements ICandidatosDao {
                         respuestas[i] = rs_respuestas.getString("answer");
                         tiempos[i] = rs_respuestas.getString("tiempo");
 
-                        System.out.println("Pregunta " + i + ": " + preguntas[i]);
-                        System.out.println("Respuesta: " + respuestas[i]);
-                        System.out.println("Tiempo: " + tiempos[i]);
-
                         i++;
                     }
+
+
 
                     int actividades = 0;
                     if (rs_actividades.next()) {
@@ -179,6 +177,9 @@ public class CandidatosDao implements ICandidatosDao {
                     boolean status = rs_persona_cuenta.getBoolean("status");
                     String area_interes = rs_area_interes.getString("area_interes");
                     String grado_academico = rs_grado_academico.getString("grado_academico");
+
+                    System.out.println(status);
+                    System.out.println(acceso);
 
                     //Llenamos un objeto de tipo Candidato y lo añadimos al arreglo
                     Candidato candidato = new Candidato(

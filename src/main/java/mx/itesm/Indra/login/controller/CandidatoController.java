@@ -12,7 +12,7 @@ public class CandidatoController extends HttpServlet {
         try {
             HttpSession sesion = request.getSession();
             if (sesion.getAttribute("candidato") != null) {
-                response.sendRedirect("https://developer.cloud.unity3d.com/share/share.html?shareId=ZJlykx-JeD");
+                response.sendRedirect("https://developer.cloud.unity3d.com/share/share.html?shareId=Z1shSGbxgw");
             }
             else {
                 request.setAttribute("mensaje", "No tienes acceso, inicia sesión.");

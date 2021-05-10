@@ -22,6 +22,25 @@ html {
 *:after {
     box-sizing: inherit;
 }
+/* custom scrollbar */
+::-webkit-scrollbar {
+    width: 20px;
+}
+
+::-webkit-scrollbar-track {
+    background-color: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+    background-color: #d6dee1;
+    border-radius: 20px;
+    border: 6px solid transparent;
+    background-clip: content-box;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background-color: #a8bbbf;
+}
 /* Here ends the code of Paul Irish */
 /* GLOBAL */
 :root {
@@ -129,7 +148,7 @@ input::-ms-clear {
 /* Header -----------------------------------------------------------------------------------------------*/
 .header {
     margin: 0 auto;
-    position: fixed;
+    position: initial;
     background: var(--mainColor);
     font-family: Roboto, sans-serif;
     z-index: 1200;
@@ -261,7 +280,7 @@ input::-ms-clear {
         text-align: right;
         width: 60%;
         display: flex;
-        justify-content: right;
+        justify-content: flex-end;
     }
     .header-right__welcome-p {
         margin: auto 0;
@@ -291,7 +310,7 @@ input::-ms-clear {
         text-align: right;
         width: 50%;
         display: flex;
-        justify-content: right;
+        justify-content: flex-end;
     }
     .header-right__welcome-p {
         margin: auto 2rem;
@@ -318,21 +337,20 @@ input::-ms-clear {
 /* Page */
 .page-container {
     max-width: 120rem;
-    position: relative;
+    position: static;
     z-index: 1200;
-    background-color: #fff;
     height: 80%;
-    margin: 25rem auto 5rem;
+    margin: 1rem auto;
     width: 90%;
 }
 @media (min-width: 768px) {
     .page-container {
         max-width: 120rem;
-        position: relative;
+        position: static;
         z-index: 1200;
         background-color: #fff;
         height: 80%;
-        margin: 16rem auto 5rem;
+        margin: 1rem auto;
     }
 }
 /* Table */
@@ -580,11 +598,13 @@ a:active {
     }
     .softskill {
         display: flex;
+        width: 33.3%;
         border-right: solid var(--mainColor) 1px;
         padding: 0.5rem;
     }
     .softskill:last-child {
         display: flex;
+        width: 33.3%;
         border-right: none;
     }
 }

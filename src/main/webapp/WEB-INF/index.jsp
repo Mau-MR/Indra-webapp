@@ -171,7 +171,7 @@
                                         <label for="career">Carrera:</label>
                                         <input type="text" id="career" name="career" placeholder="Opcional">
                                     </div>
-                                    <div class="item-grid" id="i">
+                                    <div class="item-grid" id="">
                                         <label for="Secondcareer">Segunda carrera:</label>
                                         <input type="text" id="Secondcareer" name="Secondcareer" placeholder="Opcional">
                                     </div>

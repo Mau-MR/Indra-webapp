@@ -1,7 +1,7 @@
 $(document).ready(()=>{
     $("input[type=checkbox]").on("change", function(){
         let curp = $(this).attr("id")
-        let minsait = $(".welcome").find("p").attr("id");
+        let minsait = $(".header-right__welcome-p").find("p").attr("id");
             if($(this).is(':checked')) {
             $.ajax({
                 url: 'administrador',
